@@ -1,25 +1,25 @@
 package be.vdab.scrumjava202406.bestellingen;
 
 import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public class ArtikelRepository {
     private final JdbcClient jdbcClient;
 
     public ArtikelRepository(JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
     }
-    Optional<Artikel>  findById(long id){
-        var sql= """
-                select artikelId,naam,prijs,gewichtInGram,voorraad,maximumVoorraad,maxAantalInMagazijnPlaats
-                from artikelen
-                where artikelId=?
-                """;
+
+    // sergio scrijf maar jouw method hier
+    Optional<Artikel> findById(long id) {
+        String sql = """
+               """;
         return jdbcClient.sql(sql)
                 .param(id)
                 .query(Artikel.class)
                 .optional();
-
     }
 }
