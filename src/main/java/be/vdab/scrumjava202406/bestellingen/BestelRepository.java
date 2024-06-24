@@ -14,27 +14,27 @@ public class BestelRepository {
         this.jdbcClient = jdbcClient;
     }
 
-    Optional<ArtikelId> findAndLockById(Integer id) {
+    Optional<ArtikelId> findAndLockById(Integer artikelId) {
         var sql = """
-                select id
+                select artikelId
                 from Artikelen
                 where id = ?
                 for update
                 """;
-        return jdbcClient.sql(sql).param(id).query(ArtikelId.class).optional();
+        return jdbcClient.sql(sql).param(artikelId).query(ArtikelId.class).optional();
     }
 
     record ArtikelId(Integer id) {
     }
 
-    void updateTotaleVoorraad(Integer id, Integer voorraad) {
+    void updateTotaleVoorraad(Integer artikelId, Integer voorraad) {
         var sql = """
                 update Artikelen
                 set voorraad = ?
-                where id = ?
+                where artikelId = ?
                 """;
-        if (jdbcClient.sql(sql).params(voorraad, id).update() == 0) {
-            throw new ArtikelNietGevondenException(id);
+        if (jdbcClient.sql(sql).params(voorraad, artikelId).update() == 0) {
+            throw new ArtikelNietGevondenException(artikelId);
         }
     }
 }
