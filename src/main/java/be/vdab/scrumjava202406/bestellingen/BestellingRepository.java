@@ -19,14 +19,10 @@ public class BestellingRepository {
         return jdbcClient.sql(sql).param(BETAALD_STATUS_ID).query(Long.class).list();
     }
 
-    /**
-     * @param bestelId
-     * @return gewicht in gramme
-     */
     BestellingAantalArtikelTotalGewicht totaleGewichtBestelling(long bestelId) {
         var sql = """
-                select sum(Bestellijnen.aantalBesteld) as aantalArtikelen,sum(Bestellijnen.aantalBesteld*gewichtInGram) as totaleGewicht
-                from Bestellijnen join Artikelen on Bestellijnen.artikelId = Artikelen.artikelId
+                select sum(bestellijnen.aantalBesteld) as aantalArtikelen, sum(bestellijnen.aantalBesteld*gewichtInGram) as totaleGewicht
+                from Bestellijnen join artikelen on bestellijnen.artikelId = artikelen.artikelId
                 where bestelId = ?
                 group by bestelId
                 """;
