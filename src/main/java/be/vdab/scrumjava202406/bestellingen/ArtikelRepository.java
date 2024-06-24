@@ -12,7 +12,7 @@ public class ArtikelRepository {
     }
     Optional<Artikel>  findById(long id){
         var sql= """
-                select artikelId,naam,prijs,gewichtInGram,vooraad,maximumVooraad,maxAantalInMagazijnPlaats
+                select artikelId,naam,prijs,gewichtInGram,voorraad,maximumVoorraad,maxAantalInMagazijnPlaats
                 from artikelen
                 where artikelId=?
                 """;
