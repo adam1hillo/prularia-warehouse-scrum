@@ -1,5 +1,6 @@
 package be.vdab.scrumjava202406.bestellingen;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +12,9 @@ class BestelController {
         this.bestelService = bestelService;
     }
 
-    @PostMapping("bestelling/updateVoorraad/{artikelId}")
+    @PatchMapping("bestelling/updateVoorraad/{artikelId}")
     void updateTotaleVoorraad(@PathVariable Integer artikelId,
-                   @RequestBody @PositiveOrZero Integer voorraad) {
+                   @RequestBody @PositiveOrZero @NotBlank Integer voorraad) {
         bestelService.updateTotaleVoorraad(artikelId, voorraad);
     }
 }
