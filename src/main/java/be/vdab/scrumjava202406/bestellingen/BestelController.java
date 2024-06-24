@@ -1,12 +1,7 @@
 package be.vdab.scrumjava202406.bestellingen;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 class BestelController {
