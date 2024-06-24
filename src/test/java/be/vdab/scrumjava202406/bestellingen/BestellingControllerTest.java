@@ -8,7 +8,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -37,7 +36,11 @@ public class BestellingControllerTest {
 
     @Test
     void findVijfOudsteBestellingen() throws Exception {
-
+        mockMvc.perform(get("/bestellingen/vijfoudstebestellingen"))
+                .andExpectAll(
+                        status().isOk(),
+                        jsonPath("length()")
+                                .value(JdbcTestUtils.countRowsInTableWhere(jdbcClient, BESTELLINGEN_TABLE,
+                                        "besteldatum='1900-01-01 00:00:00'")));
     }
-
 }
