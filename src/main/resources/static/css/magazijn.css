@@ -1,0 +1,113 @@
+body {
+    background-color: #FFFFFF;
+    font-family: sans-serif;
+}
+
+dd, dt {
+    margin-left: 0;
+}
+
+dt {
+    margin-top: 0.5em;
+}
+
+dd {
+    font-weight: bold;
+}
+
+.fout {
+    background-color: red;
+    color:white;
+    font-weight: bold;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+label {
+    cursor: pointer;
+}
+
+input, button {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 1em;
+    margin-top: 0.2em;
+}
+
+nav ul {
+    background-color: #ABD7A8;
+    padding: 0.4em 0;
+}
+
+nav li {
+    display: inline;
+}
+
+nav li a {
+    color: black;
+    font-weight: bold;
+    padding-left: 0.5em;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+nav li a:hover {
+    color: black;
+}
+
+button {
+    background-color: #ABD7A8;
+    border: none;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    outline: 0;
+    padding: 8px 16px;
+}
+
+button:is(:hover, :focus) {
+    background-color: #3ecc41;
+}
+
+button:active {
+    background-color: #ABD7A8;
+}
+
+button:disabled {
+    background-color: #808080;
+    cursor: not-allowed;
+}
+
+table,
+td,
+th {
+    border: 1px solid silver;
+    border-collapse: collapse;
+    padding: 5px 5px;
+}
+
+th {
+    color: white;
+    background-color: #ABD7A8;
+}
+
+td {
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+}
+
+tr:nth-child(even) {
+    background-color: #FAFABA;
+}
+
+tr:nth-child(odd) {
+    background-color: #FAFAFA;
+}
+
+.getal {
+    text-align: right;
+}
+
+#menutable {
+    background-color: aqua;
+}
