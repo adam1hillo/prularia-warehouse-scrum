@@ -16,6 +16,9 @@ public class ArtikelRepository {
     // sergio scrijf maar jouw method hier
     Optional<Artikel> findById(long id) {
         String sql = """
+               select artikelId, naam,prijs,gewichtInGram,voorraad,maximumVoorraad,maxAantalInMagazijn
+               from artikelen
+               where artikelId=?
                """;
         return jdbcClient.sql(sql)
                 .param(id)
