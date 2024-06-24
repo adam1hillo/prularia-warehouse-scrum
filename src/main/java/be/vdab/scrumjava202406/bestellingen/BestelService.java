@@ -13,8 +13,8 @@ class BestelService {
     }
 
     @Transactional
-    void updateTotaleVoorraad(Integer id, Integer voorraad) {
-        bestelRepository.updateTotaleVoorraad(id, voorraad);
+    void updateTotaleVoorraad(Integer artikelId, Integer voorraad) {
+        bestelRepository.updateTotaleVoorraad(artikelId, voorraad);
     }
 }
 
