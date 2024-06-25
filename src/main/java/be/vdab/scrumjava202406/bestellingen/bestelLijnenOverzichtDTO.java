@@ -1,6 +1,6 @@
 package be.vdab.scrumjava202406.bestellingen;
 
-public class Bestelling {
+public class bestelLijnenOverzichtDTO {
     private long bestelId;
     private int rek;
     private char rij;
@@ -8,7 +8,7 @@ public class Bestelling {
     private int aantal;
     private long artikelId;
 
-    public Bestelling(long bestelId, int rek, char rij, String naam, int aantal, long artikelId) {
+    public bestelLijnenOverzichtDTO(long bestelId, int rek, char rij, String naam, int aantal, long artikelId) {
         this.bestelId = bestelId;
         this.rek = rek;
         this.rij = rij;
