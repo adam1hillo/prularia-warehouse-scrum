@@ -7,12 +7,14 @@ if(response1.ok){
 } else {
     toon("storing");
 }*/
+const dataBesteldId = 123456;
+
 const data = [
-    { rij: 'A', rek: 10, artikel: 'artikel1', aantal: 5, klaar: true },
-    { rij: 'B', rek: 20, artikel: 'artikel2', aantal: 3, klaar: false },
-    { rij: 'C', rek: 30, artikel: 'artikel3', aantal: 7, klaar: true },
-    { rij: 'D', rek: 40, artikel: 'artikel4', aantal: 1, klaar: true },
-    { rij: 'E', rek: 50, artikel: 'artikel5', aantal: 9, klaar: false }
+    { id:1,rij: 'A', rek: 10, artikel: 'artikel1', aantal: 5, klaar: true },
+    { id:2,rij: 'B', rek: 20, artikel: 'artikel2', aantal: 3, klaar: false },
+    { id:3,rij: 'C', rek: 30, artikel: 'artikel3', aantal: 7, klaar: true },
+    { id:4,rij: 'D', rek: 40, artikel: 'artikel4', aantal: 1, klaar: true },
+    { id:5,rij: 'E', rek: 50, artikel: 'artikel5', aantal: 9, klaar: false }
 ];
 const tbody= byId("bestellingenBody");
 function tableInvullen(data){
@@ -56,3 +58,4 @@ function tableInvullen(data){
     });
 }
 tableInvullen(data);
+setText("besteldId",dataBesteldId);
