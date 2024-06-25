@@ -19,21 +19,10 @@ body, html {
     padding: 20px;
 }
 
-.header h1 {
-    font-size: 2em;
-    margin: 0;
-    color: white;
-    position: relative;
-}
-
-.header h1:before {
-    content: 'P';
-    font-size: 1.5em;
-    position: absolute;
-    top: 0;
-    left: -20px;
-    color: white;
-    transform: translateY(-50%);
+.header img {
+    width: 33%;
+    height: auto;
+    max-width: 100%;
 }
 
 .main {
