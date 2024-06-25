@@ -34,7 +34,7 @@ class BestelControllerTest {
                 .single();
     }
 
-    // TODO hier klopt iets niet
+    // TODO hier klopt iets niet: org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #1 of class path resource [bestellingen.sql]: insert into Artikelen(ean, naam, beschrijving, prijs, gewichtInGram, bestelpeil, voorraad, minimumVoorraad, maximumVoorraad, levertijd, aantalBesteldLeverancier, maxAantalInMagazijnPlaats, leveranciersId) values ('0', 'test1', '0', 1.0, 1, 1, 1, 1, 1, 1, 1, 1, 1), ('1', 'test2', '1', 1.0, 1, 1, 1, 1, 1, 1, 1, 1, 1)
     @Test
     void patchWijzigtDeTotaleVoorraadVanHetArtikel() throws Exception {
         var id = idVanTest1Artikel();
@@ -46,7 +46,7 @@ class BestelControllerTest {
                 "naam = 'gewijzigd' and id =" + id)).isOne();
     }
 
-    // TODO hier klopt ook iets niet
+    // TODO hier klopt ook iets niet: org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #1 of class path resource [bestellingen.sql]: insert into Artikelen(ean, naam, beschrijving, prijs, gewichtInGram, bestelpeil, voorraad, minimumVoorraad, maximumVoorraad, levertijd, aantalBesteldLeverancier, maxAantalInMagazijnPlaats, leveranciersId) values ('0', 'test1', '0', 1.0, 1, 1, 1, 1, 1, 1, 1, 1, 1), ('1', 'test2', '1', 1.0, 1, 1, 1, 1, 1, 1, 1, 1, 1)
     @Test
     void patchVanOnbestaandArtikelMislukt() throws Exception {
         mockMvc.perform(patch("/bestelling/updateVoorraad/{artikelId}", Long.MAX_VALUE)
