@@ -1,0 +1,90 @@
+body {
+    background-color: #f9f9f9;
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+}
+.fout {
+    background-color: red;
+    color:white;
+    font-weight: bold;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+#artikel-detail table {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+}
+#artikel-detail .header {
+    background-color: #ABD7A8;
+    padding: 20px;
+}
+#artikel-detail .header img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 80px;
+}
+
+#artikel-detail th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+#artikel-detail th {
+    color: black;
+    background-color: #f9f9f9;
+}
+
+#artikel-detail #artikelTable  > tbody > tr > td:first-child {
+    background-color: #f2f2f2; /* Example styling */
+    font-weight: bold;
+}
+
+#artikel-detail .main-title {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+#artikel-detail .sub-title {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#artikel-detail .table-container {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#artikel-detail .nested-table {
+    width: 100%;
+    border: none;
+    margin: 0;
+}
+
+#artikel-detail .nested-table th, .nested-table td {
+    border: none;
+    padding: 4px;
+}
+#artikel-detail .button-container {
+    text-align: center;
+    margin: 20px 0 20px 0;
+}
+#artikel-detail .button-container a {
+    padding: 10px 20px;
+    background-color: #ABD7A8;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
