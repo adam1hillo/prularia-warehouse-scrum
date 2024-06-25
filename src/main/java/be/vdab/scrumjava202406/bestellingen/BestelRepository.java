@@ -14,19 +14,6 @@ public class BestelRepository {
         this.jdbcClient = jdbcClient;
     }
 
-    Optional<ArtikelId> findAndLockById(Integer artikelId) {
-        var sql = """
-                select artikelId
-                from Artikelen
-                where id = ?
-                for update
-                """;
-        return jdbcClient.sql(sql).param(artikelId).query(ArtikelId.class).optional();
-    }
-
-    record ArtikelId(Integer id) {
-    }
-
     void updateTotaleVoorraad(Integer artikelId, Integer voorraad) {
         var sql = """
                 update Artikelen

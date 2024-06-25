@@ -12,9 +12,9 @@ class BestelController {
         this.bestelService = bestelService;
     }
 
-    @PatchMapping("bestelling/updateVoorraad/{artikelId}")
+    @PatchMapping("bestelling/updateVoorraad/{artikelId}/{voorraad}")
     void updateTotaleVoorraad(@PathVariable Integer artikelId,
-                   @RequestBody @PositiveOrZero @NotBlank Integer voorraad) {
+                   @PathVariable Integer voorraad) {
         bestelService.updateTotaleVoorraad(artikelId, voorraad);
     }
 }
