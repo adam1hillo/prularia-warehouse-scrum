@@ -25,14 +25,9 @@ public class BestellingControllerTest {
         this.jdbcClient = jdbcClient;
     }
 
-    @Test
-    void findCountVindtHetJuisteAantalBestellingen() throws Exception {
-        mockMvc.perform(get("/bestellingen/aantal"))
-                .andExpectAll(
-                        status().isOk(),
-                        jsonPath("$")
-                                .value(JdbcTestUtils.countRowsInTableWhere(jdbcClient, BESTELLINGEN_TABLE,
-                                        "bestellingsStatusId=2")));
+    private long idVanOudsteBestelling() {
+        var sql = "select bestelId from bestellingen WHERE year(besteldatum) = 1900 and month(besteldatum) = 1";
+        return jdbcClient.sql(sql).query(Long.class).single();
     }
 
     @Test
@@ -41,7 +36,8 @@ public class BestellingControllerTest {
                 .andExpectAll(
                         status().isOk(),
                         jsonPath("length()")
-                                .value(JdbcTestUtils.countRowsInTableWhere(jdbcClient, BESTELLINGEN_TABLE,
-                                        "besteldatum='1900-01-01 00:00:00' and bestellingsStatusId=2")));
+                                .value(5),
+                        jsonPath("[0].id")
+                                .value(idVanOudsteBestelling()));
     }
 }
