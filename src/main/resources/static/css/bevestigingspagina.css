@@ -1,7 +1,16 @@
+/* Change document colors here */
+:root {
+    --background-color: #ABD7A8;
+    --text-color: #151515;
+    --button-background-color: rgba(0,0,0,0.1);
+    --button-color: #151515;
+    --button-hover-color: #fff;
+}
+
 body{
     margin: 0;
     padding: 0;
-    background-color: #ABD7A8;
+    background-color: var(--background-color);
     font-family: Arial, serif;
 }
 
@@ -30,29 +39,29 @@ body{
     align-items: center;
     text-transform: uppercase;
     height: 100%;
-    color: #151515;
+    color: var(--text-color);
     font-size: 1.2rem;
 }
 
 .button-confirm{
     margin-top: 3rem;
-    background-color: rgba(0, 0, 0, 0.1);
-    color: #151515;
+    background-color: var(--button-background-color);
+    color: var(--button-color);
     font-size: 2rem;
     font-weight: bold;
     width:22rem;
     height: 9rem;
     border-radius: 2rem;
-    border:5px solid #151515;
+    border:5px solid var(--button-color);
     text-transform: uppercase;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .button-confirm:hover{
-    background-color: rgba(0,0,0,0.1);
-    border-color: #fff;
-    color: #fff;
+    background-color: var(--button-background-color);
+    border-color: var(--button-hover-color);
+    color: var(--button-hover-color);
 }
 
 .mr-4{
