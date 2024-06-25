@@ -28,4 +28,19 @@ public class bestelLijnenOverzichtDTORepository {
                 .query(bestelLijnenOverzichtDTO.class)
                 .list();
     }
+    List<BestellingLijnenArtikelNaam> bestellingLijnenArtikelNaam(){
+        var sql = """
+                  select b.bestelId,a.artikelId,a.naam,b.aantalBesteld,
+                    from bestellijnen b
+                    inner join artikelen a on b.artikelId = a.artikelId
+                    where b.bestelId = (SELECT bestelId
+                FROM bestellingen
+                where bestellingsStatusId = 2
+                ORDER BY besteldatum ASC
+                LIMIT 1)
+                """;
+        return jdbcClient.sql(sql)
+                .query(BestellingLijnenArtikelNaam.class)
+                .list();
+    }
 }
