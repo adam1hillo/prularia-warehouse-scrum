@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="nl">
+<head><title>Artikel Detail</title>
+    <script src="js/artikelDetail.js" type="module" defer></script>
+    <!--<link rel="icon" href="images/luigi.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/luigi.css">-->
+</head>
+<body>
+
+<h2>Detailoverzicht van:</h2>
+<h1 id="artikelNaamVoorHeader"></h1>
+
+<div id="artikel" hidden>
+    <dl>
+        <dt>Nummer:</dt>
+        <dd id="id"></dd>
+
+        <dt>Artikel naam</dt>
+        <dd id="naam"></dd>
+
+        <dt>Prijs</dt>
+        <dd id="prijs"></dd>
+
+        <dt>Gewicht</dt>
+        <dd id="gewicht"></dd>
+
+        <dt>Totale Voorraad</dt>
+        <dd id="voorraad"></dd>
+
+        <dt>Maximum Voorraad</dt>
+        <dd id="maximumVoorraad"></dd>
+
+        <dt>Maximum Aantal Magazijn</dt>
+        <dd id="maxAantalInMagazijnPlaats"></dd>
+
+        <dt>Voorraad per plaats</dt>
+        <dd id="magazijnPlaatsen"></dd>
+    </dl>
+
+</div>
+
+<div><a href="overzichBestelling.html">Terug naar Bestelling</a></div>
+
+<div id="nietGevonden" class="fout" hidden>Artikel niet gevonden.</div>
+<div id="storing" class="fout" hidden>Storing, contacteer helpdesk.</div>
+</body>
+</html>
