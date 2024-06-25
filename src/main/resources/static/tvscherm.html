@@ -1,1 +1,25 @@
 <!-- reeds pagina met deze naam aangemaakt in user story M-TV2 door Marco-->
+<!doctype html>
+<html lang="nl">
+<head>
+    <title>Prularia Magazijn TV</title>
+    <script src="js/tvscherm.js" type="module" defer></script>
+    <link rel="stylesheet" href="css/magazijn.css">
+</head>
+<body>
+<h1>Totaal # bestellingen: <span id="aantal"></span></h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Bestelnummer</th>
+        <th>Aantal</th>
+        <th>Gewicht</th>
+    </tr>
+    </thead>
+    <tbody id="oudsteBestellingenBody">
+    </tbody>
+</table>
+<div id="storing" class="fout" hidden>Storing, contacteer helpdesk.</div>
+</body>
+</html>
