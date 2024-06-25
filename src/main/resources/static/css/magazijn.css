@@ -1,113 +1,60 @@
-body {
-    background-color: #FFFFFF;
-    font-family: sans-serif;
+/* Basic reset and styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
-dd, dt {
-    margin-left: 0;
+.container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
 }
 
-dt {
-    margin-top: 0.5em;
+.header {
+    background-color: #a6cfa6; /* Light green background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-dd {
-    font-weight: bold;
-}
-
-.fout {
-    background-color: red;
-    color:white;
-    font-weight: bold;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-}
-
-label {
-    cursor: pointer;
-}
-
-input, button {
-    display: block;
-    font-size: 1.1em;
-    margin-bottom: 1em;
-    margin-top: 0.2em;
-}
-
-nav ul {
-    background-color: #ABD7A8;
-    padding: 0.4em 0;
-}
-
-nav li {
-    display: inline;
-}
-
-nav li a {
-    color: black;
-    font-weight: bold;
-    padding-left: 0.5em;
-    text-decoration: none;
-    vertical-align: middle;
-}
-
-nav li a:hover {
-    color: black;
-}
-
-button {
-    background-color: #ABD7A8;
-    border: none;
-    color: black;
-    cursor: pointer;
-    font-weight: bold;
-    outline: 0;
-    padding: 8px 16px;
-}
-
-button:is(:hover, :focus) {
-    background-color: #3ecc41;
-}
-
-button:active {
-    background-color: #ABD7A8;
-}
-
-button:disabled {
-    background-color: #808080;
-    cursor: not-allowed;
-}
-
-table,
-td,
-th {
-    border: 1px solid silver;
-    border-collapse: collapse;
-    padding: 5px 5px;
-}
-
-th {
+.header h1 {
+    font-size: 2em;
+    margin: 0;
     color: white;
-    background-color: #ABD7A8;
+    position: relative;
 }
 
-td {
-    padding-left: 0.2em;
-    padding-right: 0.2em;
+.header h1:before {
+    content: 'P';
+    font-size: 1.5em;
+    position: absolute;
+    top: 0;
+    left: -20px;
+    color: white;
+    transform: translateY(-50%);
 }
 
-tr:nth-child(even) {
-    background-color: #FAFABA;
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Space between buttons */
 }
 
-tr:nth-child(odd) {
-    background-color: #FAFAFA;
+.order-button {
+    background-color: #a6cfa6; /* Light green background */
+    color: black;
+    border: 1px solid #000;
+    padding: 20px 40px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 200px; /* Fixed width for buttons */
 }
 
-.getal {
-    text-align: right;
-}
-
-#menutable {
-    background-color: aqua;
+.order-button:hover {
+    background-color: #92b792; /* Darker green on hover */
 }
