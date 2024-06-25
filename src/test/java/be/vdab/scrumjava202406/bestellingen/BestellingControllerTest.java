@@ -31,7 +31,8 @@ public class BestellingControllerTest {
                 .andExpectAll(
                         status().isOk(),
                         jsonPath("$")
-                                .value(JdbcTestUtils.countRowsInTable(jdbcClient, BESTELLINGEN_TABLE)));
+                                .value(JdbcTestUtils.countRowsInTableWhere(jdbcClient, BESTELLINGEN_TABLE,
+                                        "bestellingsStatusId=2")));
     }
 
     @Test
@@ -41,6 +42,6 @@ public class BestellingControllerTest {
                         status().isOk(),
                         jsonPath("length()")
                                 .value(JdbcTestUtils.countRowsInTableWhere(jdbcClient, BESTELLINGEN_TABLE,
-                                        "besteldatum='1900-01-01 00:00:00'")));
+                                        "besteldatum='1900-01-01 00:00:00' and bestellingsStatusId=2")));
     }
 }
