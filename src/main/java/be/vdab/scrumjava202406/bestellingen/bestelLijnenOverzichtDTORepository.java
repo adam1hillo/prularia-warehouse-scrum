@@ -4,17 +4,16 @@ import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public class BestellingRepository {
+public class bestelLijnenOverzichtDTORepository {
     private final JdbcClient jdbcClient;
 
-    public BestellingRepository(JdbcClient jdbcClient) {
+    public bestelLijnenOverzichtDTORepository(JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
     }
 
-    public List<Bestelling> findOudsteBestelling() {
+    public List<bestelLijnenOverzichtDTO> findOudsteBestelling() {
         var sql = """
                 select b.bestelId,mp.rek,mp.rij,mp.aantal,a.naam,a.artikelId
                     from bestellijnen b
@@ -26,7 +25,7 @@ public class BestellingRepository {
                 LIMIT 1);
   """;
         return jdbcClient.sql(sql)
-                .query(Bestelling.class)
+                .query(bestelLijnenOverzichtDTO.class)
                 .list();
     }
 }
