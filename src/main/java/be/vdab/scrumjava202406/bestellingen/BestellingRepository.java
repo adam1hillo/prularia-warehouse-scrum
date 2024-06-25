@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class BestellingRepository {
+    // Status 2 betekent betaald
     private static final int BETAALD_STATUS_ID = 2;
     private final JdbcClient jdbcClient;
 
