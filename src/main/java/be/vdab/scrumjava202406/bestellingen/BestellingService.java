@@ -17,12 +17,12 @@ public class BestellingService {
         this.bestellingRepository = bestellingRepository;
     }
 
-    List<BestellingOverzicht> findVijfOudsteBestellingenOverzicht() {
+    List<BestellingOverzichtTVScherm> findVijfOudsteBestellingenOverzicht() {
         var lijstOfBestellingenId = bestellingRepository.findVijfOudsteBestellingen();
-        List<BestellingOverzicht> resultBestellingen = new ArrayList<>();
+        List<BestellingOverzichtTVScherm> resultBestellingen = new ArrayList<>();
         for (var bestelId : lijstOfBestellingenId) {
-            var bestellingMetAantalEnGewicht = bestellingRepository.totaleGewichtBestelling(bestelId);
-            resultBestellingen.add(new BestellingOverzicht(
+            var bestellingMetAantalEnGewicht = bestellingRepository.aantalArtikelenTotaleGewichtPerBestelling(bestelId);
+            resultBestellingen.add(new BestellingOverzichtTVScherm(
                     bestelId,
                     (int) bestellingMetAantalEnGewicht.aantalArtikelen(),
                     BigDecimal.valueOf(bestellingMetAantalEnGewicht.totaleGewicht()).divide(BigDecimal.valueOf(1000), 2, RoundingMode.HALF_UP)));

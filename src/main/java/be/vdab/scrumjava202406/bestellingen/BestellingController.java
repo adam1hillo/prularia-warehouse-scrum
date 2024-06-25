@@ -16,7 +16,7 @@ public class BestellingController {
     }
 
     @GetMapping("vijfoudstebestellingen")
-    List<BestellingOverzicht> bestellingOverzicht() {
+    List<BestellingOverzichtTVScherm> bestellingOverzicht() {
         return bestellingService.findVijfOudsteBestellingenOverzicht();
     }
 }
