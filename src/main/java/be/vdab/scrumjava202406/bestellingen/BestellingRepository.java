@@ -15,14 +15,14 @@ public class BestellingRepository {
     }
 
     List<Long> findVijfOudsteBestellingen() {
-        var sql = "select bestelId from Bestellingen where bestellingsStatusId = ? order by besteldatum desc limit 5";
+        var sql = "select bestelId from Bestellingen where bestellingsStatusId = ? order by besteldatum limit 5";
         return jdbcClient.sql(sql).param(BETAALD_STATUS_ID).query(Long.class).list();
     }
 
     BestellingAantalArtikelTotalGewicht totaleGewichtBestelling(long bestelId) {
         var sql = """
-                select sum(bestellijnen.aantalBesteld) as aantalArtikelen, sum(bestellijnen.aantalBesteld*gewichtInGram) as totaleGewicht
-                from Bestellijnen join artikelen on bestellijnen.artikelId = artikelen.artikelId
+                select sum(Bestellijnen.aantalBesteld) as aantalArtikelen, sum(Bestellijnen.aantalBesteld*gewichtInGram) as totaleGewicht
+                from Bestellijnen join Artikelen on Bestellijnen.artikelId = Artikelen.artikelId
                 where bestelId = ?
                 group by bestelId
                 """;
