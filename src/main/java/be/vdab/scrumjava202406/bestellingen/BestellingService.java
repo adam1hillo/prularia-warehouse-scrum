@@ -21,11 +21,11 @@ public class BestellingService {
         var lijstOfBestellingenId = bestellingRepository.findVijfOudsteBestellingen();
         List<BestellingOverzicht> resultBestellingen = new ArrayList<>();
         for (var bestelId : lijstOfBestellingenId) {
-            var bestellingOverzicht = bestellingRepository.totaleGewichtBestelling(bestelId);
+            var bestellingMetAantalEnGewicht = bestellingRepository.totaleGewichtBestelling(bestelId);
             resultBestellingen.add(new BestellingOverzicht(
                     bestelId,
-                    (int) bestellingOverzicht.aantalArtikelen(),
-                    BigDecimal.valueOf(bestellingOverzicht.totaleGewicht()).divide(BigDecimal.valueOf(1000), 2, RoundingMode.HALF_UP)));
+                    (int) bestellingMetAantalEnGewicht.aantalArtikelen(),
+                    BigDecimal.valueOf(bestellingMetAantalEnGewicht.totaleGewicht()).divide(BigDecimal.valueOf(1000), 2, RoundingMode.HALF_UP)));
         }
         return resultBestellingen;
     }
