@@ -35,6 +35,9 @@ function tableInvullen(data){
         const a = document.createElement('a');
         a.href = "overzichtArtikel.html"; // dat moet nog bespreken worden!
         a.textContent = item.artikel;
+        a.onclick= function (){
+            sessionStorage.setItem('selectedArtikelId',item.id);
+        }
         td.appendChild(a);
         tr.appendChild(td);
 
