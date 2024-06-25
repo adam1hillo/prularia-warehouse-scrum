@@ -1,0 +1,92 @@
+/* Basic reset and styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: -ms-flexbox;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+}
+
+.header {
+    background-color: #a6cfa6; /* Light green background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.header img {
+    width: 33%;
+    height: auto;
+    max-width: 100%;
+}
+
+.totaalBestellingen {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.oudsteBestellingenTable {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.fout {
+    background-color: red;
+    color:white;
+    font-weight: bold;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.table-wrapper {
+    border-radius: 10px;
+    overflow: hidden; /* Ensures the rounded corners are visible */
+    border: 1px solid black;
+}
+
+table {
+    width: 100%; /* Makes the table fill the wrapper */
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    border-bottom: 0;
+}
+td,
+th {
+    border-bottom: 1px solid black;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+th {
+    color: black;
+    background-color: white;
+}
+
+td {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+tr:nth-child(even) {
+    background-color: white;
+}
+
+tr:nth-child(odd) {
+    background-color: white;
+}
+tr:last-child {
+    border-bottom: 0; /* Remove the bottom border for the last row */
+}
+.getal {
+    text-align: right;
+}
