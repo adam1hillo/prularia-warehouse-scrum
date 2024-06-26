@@ -35,7 +35,7 @@ public class BestelLijnenRepository {
                     where b.bestelId = (SELECT bestelId
                 FROM Bestellingen
                 where bestellingsStatusId = 2
-                ORDER BY besteldatum ASC
+                ORDER BY besteldatum
                 LIMIT 1)
                 """;
         return jdbcClient.sql(sql)
