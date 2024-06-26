@@ -1,4 +1,4 @@
-package be.vdab.scrumjava202406;
+package be.vdab.scrumjava202406.bestellingen;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
