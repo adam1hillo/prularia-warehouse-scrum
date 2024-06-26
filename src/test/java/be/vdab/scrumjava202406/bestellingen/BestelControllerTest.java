@@ -13,13 +13,14 @@ import org.springframework.http.MediaType;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
 @Transactional
-@Sql("/bestellingen.sql")
+@Sql("/artikelen.sql")
 @AutoConfigureMockMvc
 class BestelControllerTest {
-    private final static String BESTELLINGEN_TABLE = "bestellingen";
+    private final static String ARTIKELEN_TABLE = "Artikelen";
     private final MockMvc mockMvc;
     private final JdbcClient jdbcClient;
 
@@ -37,13 +38,12 @@ class BestelControllerTest {
     // TODO hier klopt iets niet: org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #1 of class path resource [bestellingen.sql]: insert into Artikelen(ean, naam, beschrijving, prijs, gewichtInGram, bestelpeil, voorraad, minimumVoorraad, maximumVoorraad, levertijd, aantalBesteldLeverancier, maxAantalInMagazijnPlaats, leveranciersId) values ('0', 'test1', '0', 1.0, 1, 1, 1, 1, 1, 1, 1, 1, 1), ('1', 'test2', '1', 1.0, 1, 1, 1, 1, 1, 1, 1, 1, 1)
     @Test
     void patchWijzigtDeTotaleVoorraadVanHetArtikel() throws Exception {
-        var id = idVanTest1Artikel();
-        mockMvc.perform(patch("bestelling/updateVoorraad/{artikelId}", id)
-                        .contentType(MediaType.TEXT_PLAIN)
-                        .content("gewijzigd"))
-                .andExpect(status().isOk());
-        assertThat(JdbcTestUtils.countRowsInTableWhere(jdbcClient, BESTELLINGEN_TABLE,
-                "naam = 'gewijzigd' and id =" + id)).isOne();
+        var artikelId = idVanTest1Artikel();
+        var voorraad = 22;
+        mockMvc.perform(patch("/bestelling/updateVoorraad/{id}/{voorraad}", artikelId, voorraad))
+                .andExpectAll(status().isOk());
+        assertThat(JdbcTestUtils.countRowsInTableWhere(jdbcClient, ARTIKELEN_TABLE,
+                "voorraad = 22 and artikelId = " + artikelId)).isOne();
     }
 
     // TODO hier klopt ook iets niet: org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #1 of class path resource [bestellingen.sql]: insert into Artikelen(ean, naam, beschrijving, prijs, gewichtInGram, bestelpeil, voorraad, minimumVoorraad, maximumVoorraad, levertijd, aantalBesteldLeverancier, maxAantalInMagazijnPlaats, leveranciersId) values ('0', 'test1', '0', 1.0, 1, 1, 1, 1, 1, 1, 1, 1, 1), ('1', 'test2', '1', 1.0, 1, 1, 1, 1, 1, 1, 1, 1, 1)
