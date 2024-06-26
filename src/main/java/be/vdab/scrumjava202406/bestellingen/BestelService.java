@@ -21,7 +21,7 @@ class BestelService {
     @Transactional
     void updateBestellingStatusToOnderweg(int bestelId){
         Optional<BestelRepository.BestelId> lockedBestelId = bestelRepository.findAndLockByBesteId(bestelId);
-        System.out.println(lockedBestelId);
+        //System.out.println(lockedBestelId);
         if (lockedBestelId.isPresent()) {
             bestelRepository.updateBestellingStatus(bestelId);
         } else {

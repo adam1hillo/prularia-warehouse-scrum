@@ -11,15 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.MediaType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @Transactional
-@Sql("/bestellingen.sql")
+@Sql({"/bestellingen.sql","/bestelling.sql"})
 @AutoConfigureMockMvc
 class BestelControllerTest {
     private final static String BESTELLINGEN_TABLE = "bestellingen";
+    private final static String BESTELLING_TABLE = "bestelling";
     private final MockMvc mockMvc;
     private final JdbcClient jdbcClient;
 
@@ -53,6 +55,16 @@ class BestelControllerTest {
                         .contentType(MediaType.TEXT_PLAIN)
                         .content("gewijzigd"))
                 .andExpect(status().isNotFound());
+    }
+    @Test
+    void updateBestellingStatusToOnderweg_success() throws Exception {
+        mockMvc.perform(patch("/bestelling/updateStatusOnderweg/1"))
+                .andExpect(status().isOk());
+
+        var sql = "SELECT bestellingsStatusId FROM " + BESTELLING_TABLE + " WHERE bestelId = ?";
+        var bestellingsStatusId = jdbcClient.sql(sql).param(1).query(Integer.class).optional().orElseThrow();
+
+        assertEquals(5, bestellingsStatusId);
     }
 }
 
