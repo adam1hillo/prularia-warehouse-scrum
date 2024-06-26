@@ -2,12 +2,12 @@
 
 import {byId, verwijderChildElementenVan, toon, verberg, setText} from "./util.js";
 
-
-
+const TIMING_INTERVAL = 10000; // in millisecond 10s = 10000
 async function getVijfOudsteBestellingen() {
-    verberg("storing");
+    verberg("storingBestelling");
     const response = await fetch("bestellingen/vijfoudstebestellingen");
     if (response.ok) {
+        verberg("storingBestelling");
         const oudsteBestellingenBody = byId("oudsteBestellingenBody");
         verwijderChildElementenVan(oudsteBestellingenBody);
         const oudsteBestellingen = await response.json();
@@ -18,7 +18,7 @@ async function getVijfOudsteBestellingen() {
             tr.insertCell().innerText = `${oudsteBestelling.totaleGewicht} kg`;
         }
     } else {
-        toon("storing");
+        toon("storingBestelling");
     }
 }
 
@@ -26,10 +26,11 @@ async function getAantal(){
     const response = await fetch("bestellingen/aantal");
 
     if (response.ok) {
+        verberg("storingAantal");
         const body = await response.text();
         setText("aantal", body);
     } else {
-        toon("storing");
+        toon("storingAantal");
     }
 
 }
@@ -37,8 +38,7 @@ async function main(){
     window.setInterval(function(){
          getVijfOudsteBestellingen();
          getAantal();
-    }, 10000);
-
+    }, TIMING_INTERVAL);
 }
 
 window.onload = main;
