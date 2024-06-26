@@ -1,10 +1,12 @@
 /* Change document colors here */
 :root {
-    --background-color: #ABD7A8;
+    --background-color: #fff;
+    --banner-color: #ABD7A8;
     --text-color: #151515;
-    --button-background-color: rgba(0,0,0,0.1);
+    --button-background-color: #ABD7A8;
+    --button-background-color-hover: #92b792;
     --button-color: #151515;
-    --button-hover-color: #fff;
+    --button-hover-color: #000;
 }
 
 body{
@@ -14,15 +16,18 @@ body{
     font-family: Arial, serif;
 }
 
-.banner{
+.header {
+    background-color: #a6cfa6; /* Light green background */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10rem;
+    padding: 20px;
 }
 
-.logo{
-    width: 20rem;
+.header img {
+    width: 33%;
+    height: auto;
+    max-width: 100%;
 }
 
 .container{
