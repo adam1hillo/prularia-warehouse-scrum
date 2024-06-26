@@ -15,7 +15,7 @@ public class MagazijnPlaatsRepository {
 
     List<MagazijnPlaats> findAllPlaatsById(long id) {
         String sql = """ 
-                SELECT rij, rek, aantal
+                SELECT magazijnPlaatsId, artikelId, rij, rek, aantal
                 FROM magazijnplaatsen
                 WHERE artikelId = ? ;""";
         return jdbcClient.sql(sql)
