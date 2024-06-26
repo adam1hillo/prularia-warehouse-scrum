@@ -13,6 +13,8 @@ public class MagazijnPlaatsRepository {
         this.jdbcClient = jdbcClient;
     }
 
+
+
     List<MagazijnPlaats> findAllPlaatsById(long id) {
         String sql = """ 
                 SELECT magazijnPlaatsId, artikelId, rij, rek, aantal
