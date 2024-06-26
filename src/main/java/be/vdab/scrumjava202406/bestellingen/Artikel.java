@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class Artikel {
     private final long artikelId;
+    private final String ean;
     private final String naam;
     private final String beschrijving;
     private final BigDecimal prijs;
@@ -17,8 +18,9 @@ public class Artikel {
     private final int maxAantalInMagazijnPlaats;
     private final long leveranciersId;
 
-    public Artikel(long artikelId, String naam, String beschrijving, BigDecimal prijs, long gewichtInGram, int bestelpeil, int voorraad, int minimumVoorraad, int maximumVoorraad, int levertijd, int aantalBesteldLeverancier, int maxAantalInMagazijnPlaats, long leveranciersId) {
+    public Artikel(long artikelId, String ean, String naam, String beschrijving, BigDecimal prijs, long gewichtInGram, int bestelpeil, int voorraad, int minimumVoorraad, int maximumVoorraad, int levertijd, int aantalBesteldLeverancier, int maxAantalInMagazijnPlaats, long leveranciersId) {
         this.artikelId = artikelId;
+        this.ean = ean;
         this.naam = naam;
         this.beschrijving = beschrijving;
         this.prijs = prijs;
@@ -35,6 +37,10 @@ public class Artikel {
 
     public long getArtikelId() {
         return artikelId;
+    }
+
+    public String getEan() {
+        return ean;
     }
 
     public String getNaam() {
