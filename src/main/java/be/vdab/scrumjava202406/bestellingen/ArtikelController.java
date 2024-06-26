@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @RestController
-@RequestMapping("artikels")
+@RequestMapping("artikelen")
 public class ArtikelController {
     private final ArtikelService artikelService;
     private static MagazijnPlaatsService magazijnPlaatsService = null;

@@ -16,7 +16,7 @@ function verbergArtikelEnFouten() {
 
 async function toonArtikelDetail() {
     //const response = await fetch(`artikels/${id}`);
-    const response = await fetch(`artikels/6`);
+    const response = await fetch(`artikelen/6`);
     if (response.ok) {
         const artikel = await response.json();
         toon("artikelTable");
