@@ -2,8 +2,7 @@
 
 import {byId, verwijderChildElementenVan, toon, verberg, setText} from "./util.js";
 
-await getVijfOudsteBestellingen();
-await getAantal();
+
 
 async function getVijfOudsteBestellingen() {
     verberg("storing");
@@ -32,4 +31,14 @@ async function getAantal(){
     } else {
         toon("storing");
     }
+
 }
+async function main(){
+    window.setInterval(function(){
+         getVijfOudsteBestellingen();
+         getAantal();
+    }, 10000);
+
+}
+
+window.onload = main;
