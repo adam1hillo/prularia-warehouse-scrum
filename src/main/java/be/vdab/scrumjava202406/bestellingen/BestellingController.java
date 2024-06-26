@@ -11,12 +11,17 @@ import java.util.List;
 public class BestellingController {
     private final BestellingService bestellingService;
 
-    public BestellingController(BestellingService bestellingService) {
+    BestellingController(BestellingService bestellingService) {
         this.bestellingService = bestellingService;
     }
 
     @GetMapping("vijfoudstebestellingen")
     List<BestellingOverzichtTVScherm> bestellingOverzicht() {
         return bestellingService.findVijfOudsteBestellingenOverzicht();
+    }
+
+    @GetMapping("aantal")
+    long findCount() {
+        return bestellingService.aantalKlaarOmGepickt();
     }
 }

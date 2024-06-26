@@ -7,6 +7,7 @@ import java.util.List;
 
 @Repository
 public class BestellingRepository {
+    // Status 2 betekent betaald
     private static final int BETAALD_STATUS_ID = 2;
     private final JdbcClient jdbcClient;
 
@@ -28,5 +29,13 @@ public class BestellingRepository {
                 """;
 
         return jdbcClient.sql(sql).param(bestelId).query(BestellingAantalArtikelTotalGewicht.class).single();
+    }
+
+    long countBestellingKlaarOmGepickt() {
+        var sql = """
+                SELECT COUNT(Bestellingen.bestelId) as bestelingTotal FROM Bestellingen
+                WHERE bestellingsStatusId = ?;
+                """;
+        return (long) jdbcClient.sql(sql).param(BETAALD_STATUS_ID).query().singleValue();
     }
 }

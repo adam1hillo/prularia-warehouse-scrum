@@ -1,10 +1,9 @@
 "use strict"
 
-import {byId, verwijderChildElementenVan, toon, verberg} from "./util.js";
+import {byId, verwijderChildElementenVan, toon, verberg, setText} from "./util.js";
 
 await getVijfOudsteBestellingen();
-
-
+await getAantal();
 
 async function getVijfOudsteBestellingen() {
     verberg("storing");
@@ -19,6 +18,17 @@ async function getVijfOudsteBestellingen() {
             tr.insertCell().innerText = oudsteBestelling.aantalArtikelen;
             tr.insertCell().innerText = `${oudsteBestelling.totaleGewicht} kg`;
         }
+    } else {
+        toon("storing");
+    }
+}
+
+async function getAantal(){
+    const response = await fetch("bestellingen/aantal");
+
+    if (response.ok) {
+        const body = await response.text();
+        setText("aantal", body);
     } else {
         toon("storing");
     }

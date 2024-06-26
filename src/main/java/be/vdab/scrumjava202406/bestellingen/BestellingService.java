@@ -17,6 +17,11 @@ public class BestellingService {
         this.bestellingRepository = bestellingRepository;
     }
 
+    long aantalKlaarOmGepickt() {
+        return bestellingRepository.countBestellingKlaarOmGepickt();
+    }
+
+
     List<BestellingOverzichtTVScherm> findVijfOudsteBestellingenOverzicht() {
         var lijstOfBestellingenId = bestellingRepository.findVijfOudsteBestellingen();
         List<BestellingOverzichtTVScherm> resultBestellingen = new ArrayList<>();

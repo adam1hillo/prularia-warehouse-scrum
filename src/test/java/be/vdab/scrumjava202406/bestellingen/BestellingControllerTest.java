@@ -40,4 +40,14 @@ public class BestellingControllerTest {
                         jsonPath("[0].id")
                                 .value(idVanOudsteBestelling()));
     }
+
+    @Test
+    void findCountVindtHetJuisteAantalBestellingenMetStatusBetaald() throws Exception {
+        mockMvc.perform(get("/bestellingen/aantal"))
+                .andExpectAll(
+                        status().isOk(),
+                        jsonPath("$")
+                                .value(JdbcTestUtils.countRowsInTableWhere(jdbcClient, BESTELLINGEN_TABLE,
+                                        "bestellingsStatusId = 2")));
+    }
 }
