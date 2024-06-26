@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql({"/artikelen.sql","/bestellingen.sql"})
 @AutoConfigureMockMvc
 class BestelControllerTest {
-    private final static String ARTIKELEN_TABLE = "artikelen";
+    private final static String ARTIKELEN_TABLE = "Artikelen";
     private final static String BESTELLINGEN_TABLE = "bestellingen";
 
     private final MockMvc mockMvc;
