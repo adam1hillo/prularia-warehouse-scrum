@@ -17,5 +17,9 @@ class BestelController {
                    @PathVariable Integer voorraad) {
         bestelService.updateTotaleVoorraad(artikelId, voorraad);
     }
+    @PatchMapping("bestelling/updateStatusOnderweg/{bestelId}")
+    void updateBestellingStatusToOnderweg(@PathVariable int bestelId){
+        bestelService.updateBestellingStatusToOnderweg(bestelId);
+    }
 }
 
