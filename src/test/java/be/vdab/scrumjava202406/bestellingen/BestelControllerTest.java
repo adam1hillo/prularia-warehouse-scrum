@@ -11,16 +11,19 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.MediaType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
 @Transactional
-@Sql("/artikelen.sql")
+@Sql({"/artikelen.sql","/bestellingen.sql"})
 @AutoConfigureMockMvc
 class BestelControllerTest {
-    private final static String ARTIKELEN_TABLE = "Artikelen";
+    private final static String ARTIKELEN_TABLE = "artikelen";
+    private final static String BESTELLINGEN_TABLE = "bestellingen";
+
     private final MockMvc mockMvc;
     private final JdbcClient jdbcClient;
 
@@ -52,6 +55,27 @@ class BestelControllerTest {
         mockMvc.perform(patch("/bestelling/updateVoorraad/{artikelId}", Long.MAX_VALUE)
                         .contentType(MediaType.TEXT_PLAIN)
                         .content("gewijzigd"))
+                .andExpect(status().isNotFound());
+    }
+
+
+    private int idVanTest1BestelId() {
+        return jdbcClient.sql("select bestelId from bestellingen where familienaam = 'test1'")
+                .query(Integer.class)
+                .single();
+    }
+    @Test
+    void updateBestellingStatusToOnderweg_success() throws Exception {
+        var bestelId = idVanTest1BestelId();
+        mockMvc.perform(patch("/bestelling/updateStatusOnderweg/{id}",bestelId))
+                .andExpect(status().isOk());
+        assertThat(JdbcTestUtils.countRowsInTableWhere(jdbcClient, BESTELLINGEN_TABLE,
+                "bestellingsStatusId = 5 and bestelId =" + bestelId)).isOne();
+    }
+
+    @Test
+    void updateBestellingStatusToOnderweg_notFound() throws Exception {
+        mockMvc.perform(patch("/bestelling/updateStatusOnderweg/{id}",Integer.MAX_VALUE))
                 .andExpect(status().isNotFound());
     }
 }

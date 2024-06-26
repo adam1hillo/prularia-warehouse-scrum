@@ -5,6 +5,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("bestelling")
 class BestelController {
     private final BestelService bestelService;
 
@@ -12,12 +13,12 @@ class BestelController {
         this.bestelService = bestelService;
     }
 
-    @PatchMapping("bestelling/updateVoorraad/{artikelId}/{voorraad}")
+    @PatchMapping("updateVoorraad/{artikelId}/{voorraad}")
     void updateTotaleVoorraad(@PathVariable Integer artikelId,
                    @PathVariable Integer voorraad) {
         bestelService.updateTotaleVoorraad(artikelId, voorraad);
     }
-    @PatchMapping("bestelling/updateStatusOnderweg/{bestelId}")
+    @PatchMapping("updateStatusOnderweg/{bestelId}")
     void updateBestellingStatusToOnderweg(@PathVariable int bestelId){
         bestelService.updateBestellingStatusToOnderweg(bestelId);
     }
