@@ -16,17 +16,20 @@ body{
     font-family: Arial, serif;
 }
 
-.banner{
+.header {
+    background-color: #a6cfa6; /* Light green background */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10rem;
-    background-color: var(--banner-color);
+    padding: 20px;
 }
 
-.logo{
-    width: 20rem;
+.header img {
+    width: 33%;
+    height: auto;
+    max-width: 100%;
 }
+
 
 .container{
     display: flex;
