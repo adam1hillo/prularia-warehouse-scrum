@@ -1,10 +1,12 @@
 /* Change document colors here */
 :root {
-    --background-color: #ABD7A8;
+    --background-color: #fff;
+    --banner-color: #ABD7A8;
     --text-color: #151515;
-    --button-background-color: rgba(0,0,0,0.1);
+    --button-background-color: #ABD7A8;
+    --button-background-color-hover: #92b792;
     --button-color: #151515;
-    --button-hover-color: #fff;
+    --button-hover-color: #000;
 }
 
 body{
@@ -19,6 +21,7 @@ body{
     justify-content: center;
     align-items: center;
     height: 10rem;
+    background-color: var(--banner-color);
 }
 
 .logo{
@@ -59,7 +62,7 @@ body{
 }
 
 .button-confirm:hover{
-    background-color: var(--button-background-color);
+    background-color: var(--button-background-color-hover);
     border-color: var(--button-hover-color);
     color: var(--button-hover-color);
 }
