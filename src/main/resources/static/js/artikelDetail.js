@@ -3,7 +3,7 @@ import {byId, toon, verberg, setText} from "./util.js";
 
 verbergArtikelEnFouten();
 // todo get id from localStorage and pass it to the function
-// const idVanArtikel = JSON.parse(sessionStorage.getItem("idEnNaam"));
+//   const idVanArtikel = sessionStorage.getItem("selectedArtikelId");
 
 toonArtikelDetail();
 
