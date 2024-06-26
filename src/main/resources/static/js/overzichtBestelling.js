@@ -22,7 +22,6 @@ function tableInvullen(data){
 
         const tr = document.createElement('tr');
 
-
         let td = document.createElement('td');
         td.textContent = item.rij;
         tr.appendChild(td);
@@ -41,23 +40,29 @@ function tableInvullen(data){
         td.appendChild(a);
         tr.appendChild(td);
 
-
-
         td = document.createElement('td');
         td.textContent = item.aantal;
         tr.appendChild(td);
 
-
         td = document.createElement('td');
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
-        checkbox.checked = item.klaar;
         td.appendChild(checkbox);
         tr.appendChild(td);
 
-
         tbody.appendChild(tr);
 
+        checkbox.onclick = function () {
+            if (checkbox.checked) {
+                tr.classList.add("checked");
+                tr.style.background = "#ABD7A8";
+            } else {
+                tr.classList.remove("checked");
+                tr.style.background = "white";
+            }
+            const checkedList = document.getElementsByClassName("checked");
+            byId("afgewerkt").disabled = checkedList.length !== data.length;
+        }
     });
 }
 tableInvullen(data);
