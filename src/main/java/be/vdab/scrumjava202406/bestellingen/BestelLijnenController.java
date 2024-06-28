@@ -1,10 +1,9 @@
 package be.vdab.scrumjava202406.bestellingen;
 
+import be.vdab.scrumjava202406.util.GeenBestellingGevondenException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("artikelen")

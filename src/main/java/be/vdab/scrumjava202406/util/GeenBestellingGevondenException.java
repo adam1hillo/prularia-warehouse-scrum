@@ -1,4 +1,4 @@
-package be.vdab.scrumjava202406.bestellingen;
+package be.vdab.scrumjava202406.util;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
