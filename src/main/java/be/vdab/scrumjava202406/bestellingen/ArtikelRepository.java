@@ -13,11 +13,10 @@ public class ArtikelRepository {
         this.jdbcClient = jdbcClient;
     }
 
-    // sergio scrijf maar jouw method hier
     Optional<Artikel> findById(long id) {
         String sql = """
                select artikelId, ean, naam,beschrijving,prijs,gewichtInGram,bestelpeil,voorraad,minimumVoorraad,maximumVoorraad,levertijd,aantalBesteldLeverancier,maxAantalInMagazijnPlaats,leveranciersId
-               from artikelen
+               from Artikelen
                where artikelId=?
                """;
         return jdbcClient.sql(sql)
