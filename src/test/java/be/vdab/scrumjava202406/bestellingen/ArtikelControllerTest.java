@@ -10,6 +10,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.MediaType;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
@@ -18,11 +21,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @Transactional
-@Sql({"/artikelen.sql","/bestellingen.sql"})
+@Sql({"/Artikelen.sql", "/Bestellingen.sql"})
 @AutoConfigureMockMvc
 class ArtikelControllerTest {
     private final static String ARTIKELEN_TABLE = "Artikelen";
-    private final static String BESTELLINGEN_TABLE = "bestellingen";
+    private final static String BESTELLINGEN_TABLE = "Bestellingen";
+    private static final Path TEST_RESOURCES = Path.of("src/test/resources");
 
     private final MockMvc mockMvc;
     private final JdbcClient jdbcClient;
@@ -41,10 +45,13 @@ class ArtikelControllerTest {
     // grant insert on Artikelen to Javagebruiker --> in creeerDatabaseMetDataPrulariaPuntComMySQL2023.sql plaatsen
     @Test
     void patchWijzigtDeTotaleVoorraadVanHetArtikel() throws Exception {
+        var jsonData = Files.readString(TEST_RESOURCES.resolve("correcteVoorraad.json"));
         var artikelId = idVanTest1Artikel();
-        var voorraad = 22;
-        mockMvc.perform(patch("/bestelling/updateVoorraad/{id}/{voorraad}", artikelId, voorraad))
-                .andExpectAll(status().isOk());
+        mockMvc.perform(patch("/bestelling/updateVoorraad/{id}/voorraad", artikelId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonData))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
         assertThat(JdbcTestUtils.countRowsInTableWhere(jdbcClient, ARTIKELEN_TABLE,
                 "voorraad = 22 and artikelId = " + artikelId)).isOne();
     }
