@@ -59,9 +59,10 @@ class ArtikelControllerTest {
     // grant insert on Artikelen to Javagebruiker --> in creeerDatabaseMetDataPrulariaPuntComMySQL2023.sql plaatsen
     @Test
     void patchVanOnbestaandArtikelMislukt() throws Exception {
-        mockMvc.perform(patch("/bestelling/updateVoorraad/{artikelId}", Long.MAX_VALUE)
-                        .contentType(MediaType.TEXT_PLAIN)
-                        .content("gewijzigd"))
+        var jsonData = Files.readString(TEST_RESOURCES.resolve("correcteVoorraad.json"));
+        mockMvc.perform(patch("/bestelling/updateVoorraad/{artikelId}/voorraad", Long.MAX_VALUE)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonData))
                 .andExpect(status().isNotFound());
     }
 
