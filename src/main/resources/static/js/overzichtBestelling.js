@@ -36,7 +36,7 @@ function tableInvullen(data){
         a.href = "artikelDetail.html"; // dat moet nog bespreken worden!
         a.textContent = item.naam;
         a.onclick= function (){
-            sessionStorage.setItem('selectedArtikelId',item.id);
+            sessionStorage.setItem('artikelId',item.id);
             getCheckedCheckboxes();
         }
         td.appendChild(a);
@@ -55,6 +55,7 @@ function tableInvullen(data){
         tbody.appendChild(tr);
 
         checkbox.onclick = function () {
+            getCheckedCheckboxes();
             if (checkbox.checked) {
                 tr.classList.add("checked");
                 tr.style.background = "#ABD7A8";
