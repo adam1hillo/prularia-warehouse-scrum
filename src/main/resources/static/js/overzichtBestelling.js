@@ -36,7 +36,7 @@ function tableInvullen(data){
         a.href = "artikelDetail.html"; // dat moet nog bespreken worden!
         a.textContent = item.naam;
         a.onclick= function (){
-            sessionStorage.setItem('artikelId',item.id);
+            sessionStorage.setItem('artikelId',item.artikelId);
             getCheckedCheckboxes();
         }
         td.appendChild(a);
