@@ -35,6 +35,8 @@ async function getAantal(){
 
 }
 async function main(){
+    await getVijfOudsteBestellingen();
+    await getAantal();
     window.setInterval(function(){
          getVijfOudsteBestellingen();
          getAantal();
