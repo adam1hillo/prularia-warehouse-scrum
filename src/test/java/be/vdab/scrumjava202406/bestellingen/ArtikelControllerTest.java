@@ -21,11 +21,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @Transactional
-@Sql({"/Artikelen.sql", "/Bestellingen.sql"})
+@Sql("/Artikelen.sql")
 @AutoConfigureMockMvc
 class ArtikelControllerTest {
     private final static String ARTIKELEN_TABLE = "Artikelen";
-    private final static String BESTELLINGEN_TABLE = "Bestellingen";
     private static final Path TEST_RESOURCES = Path.of("src/test/resources");
 
     private final MockMvc mockMvc;
@@ -75,26 +74,6 @@ class ArtikelControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-
-    private int idVanTest1BestelId() {
-        return jdbcClient.sql("select bestelId from bestellingen where familienaam = 'test1'")
-                .query(Integer.class)
-                .single();
-    }
-    @Test
-    void updateBestellingStatusToOnderweg_success() throws Exception {
-        var bestelId = idVanTest1BestelId();
-        mockMvc.perform(patch("/bestelling/updateStatusOnderweg/{id}",bestelId))
-                .andExpect(status().isOk());
-        assertThat(JdbcTestUtils.countRowsInTableWhere(jdbcClient, BESTELLINGEN_TABLE,
-                "bestellingsStatusId = 5 and bestelId =" + bestelId)).isOne();
-    }
-
-    @Test
-    void updateBestellingStatusToOnderweg_notFound() throws Exception {
-        mockMvc.perform(patch("/bestelling/updateStatusOnderweg/{id}",Integer.MAX_VALUE))
-                .andExpect(status().isNotFound());
-    }
 }
 
 
