@@ -1,0 +1,96 @@
+body {
+    background-color: #f9f9f9;
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+}
+.fout {
+    background-color: red;
+    color:white;
+    font-weight: bold;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+#artikel-detail table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#artikel-detail .table-container {
+    width: 50%;
+    margin: 20px auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+
+}
+
+#artikel-detail .header {
+    background-color: #ABD7A8;
+    padding: 20px;
+}
+#artikel-detail .header img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 80px;
+}
+
+#artikel-detail th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+#artikel-detail th {
+    color: black;
+    background-color: #f9f9f9;
+}
+
+#artikel-detail #artikelTable  > tbody > tr > td:first-child {
+    font-weight: bold;
+}
+
+#artikel-detail .main-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+#artikel-detail .sub-title {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+
+}
+
+
+#artikel-detail .nested-table {
+    width: 100%;
+    border: none;
+    margin: 0;
+}
+
+#artikel-detail .nested-table th, .nested-table td {
+    border: none;
+    padding: 4px;
+    text-align: center;
+    vertical-align: middle;
+}
+#artikel-detail .button-container {
+    text-align: center;
+    margin: 20px 0 20px 0;
+
+}
+#artikel-detail .button-container a {
+    padding: 10px 20px;
+    background-color: #ABD7A8;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    border: 2px solid black;
+}

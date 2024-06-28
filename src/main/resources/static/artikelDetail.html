@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <title>Detailoverzicht</title>
+
+    <script src="js/artikelDetail.js" type="module" defer></script>
+    <!--<link rel="icon" href="images/luigi.ico" type="image/x-icon">-->
+
+    <link rel="stylesheet" href="css/artikelDetail.css">
+</head>
+<body>
+
+<div id="artikel-detail">
+    <div class="header">
+        <img src="./images/logo_prularia_wit.png" alt="Prularia">
+    </div>
+
+    <div class="sub-title">Detailoverzicht van:</div>
+    <div class="main-title" id="artikelNaamVoorHeader" ></div>
+
+    <div class="table-container">
+        <table id="artikelTable">
+            <tr>
+                <td>Nummer</td>
+                <td id="id"></td>
+            </tr>
+            <tr>
+                <td>Artikel naam</td>
+                <td id="naam"></td>
+            </tr>
+            <tr>
+                <td>Prijs</td>
+                <td id="prijs"></td>
+            </tr>
+            <tr>
+                <td>Gewicht</td>
+                <td id="gewicht"></td>
+            </tr>
+            <tr>
+                <td>Totale Voorraad</td>
+                <td id="voorraad"></td>
+            </tr>
+            <tr>
+                <td>Maximum Voorraad</td>
+                <td id="maximumVoorraad"></td>
+            </tr>
+            <tr>
+                <td>Maximum Aantal Magazijn</td>
+                <td id="maxAantalInMagazijnPlaats"></td>
+            </tr>
+
+
+            <tr>
+                <td>Voorraad per plaats</td>
+                <td colspan="2" id="magazijnPlaatsen">
+                    <table class="nested-table">
+                        <thead>
+                            <tr>
+                                <th>Rij</th>
+                                <th>Rek</th>
+                                <th>Aantal</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="nestedTableBody">
+
+                        </tbody>
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="button-container"><a href="overzichBestelling.html">Terug naar Bestelling</a></div>
+
+    <div id="nietGevonden" class="fout" hidden>Artikel niet gevonden.</div>
+    <div id="storing" class="fout" hidden>Storing, contacteer helpdesk.</div>
+
+</div>
+</body>
+</html>
