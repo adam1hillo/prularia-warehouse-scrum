@@ -13,7 +13,7 @@ public class BestelLijnenRepository {
         this.jdbcClient = jdbcClient;
     }
 
-    public List<MagazijnplaatAantalMetArtikelId> magazijnplaatPerArtikelAndBestelId(long bestelId) {
+    public List<MagazijnplaatsAantalMetArtikelId> findAllMagazijnplaatsPerArtikelAndBestelId(long bestelId) {
         var sql = """
                               select mp.rek,mp.rij,mp.aantal,a.artikelId
                                   from Bestellijnen b
@@ -23,11 +23,11 @@ public class BestelLijnenRepository {
                 """;
         return jdbcClient.sql(sql)
                 .param(bestelId)
-                .query(MagazijnplaatAantalMetArtikelId.class)
+                .query(MagazijnplaatsAantalMetArtikelId.class)
                 .list();
     }
 
-    List<BestellingLijnenArtikelNaam> bestellingLijnenArtikelNaam(){
+    List<BestelLijnenArtikelNaam> findOudsteBestelLijnenMetArtikelNaamEnId(){
         var sql = """
                   select b.bestelId,a.artikelId,a.naam,b.aantalBesteld
                     from Bestellijnen b
@@ -39,7 +39,7 @@ public class BestelLijnenRepository {
                 LIMIT 1)
                 """;
         return jdbcClient.sql(sql)
-                .query(BestellingLijnenArtikelNaam.class)
+                .query(BestelLijnenArtikelNaam.class)
                 .list();
     }
 }

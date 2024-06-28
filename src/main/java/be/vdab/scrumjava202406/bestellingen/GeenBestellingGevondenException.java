@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class GeenBestellingOmtTePickException extends RuntimeException {
-    public GeenBestellingOmtTePickException() {
-        super("Geen bestellingen klaar omt te pick");
+public class GeenBestellingGevondenException extends RuntimeException {
+    public GeenBestellingGevondenException() {
+        super("Geen bestelling gevonden");
     }
 }

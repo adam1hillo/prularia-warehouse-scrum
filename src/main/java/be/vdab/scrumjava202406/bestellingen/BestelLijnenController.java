@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("artikelen")
 public class BestelLijnenController {
@@ -14,11 +16,7 @@ public class BestelLijnenController {
     }
 
     @GetMapping("vanOudsteBestellingen")
-    BestellingOmTePick findOudsteBestelling() {
-        var result = bestelLijnenService.findBestellingOmTePick();
-        if (result.bestelId() == -1) {
-            throw new GeenBestellingOmtTePickException();
-        }
-        return result;
+    BestellingOmTePicken findOudsteBestelling() {
+        return bestelLijnenService.findBestellingOmTePicken().orElseThrow(GeenBestellingGevondenException::new);
     }
 }
