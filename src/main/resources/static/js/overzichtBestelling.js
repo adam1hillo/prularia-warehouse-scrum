@@ -15,8 +15,9 @@ const data = [
     { id:3,rij: 'C', rek: 30, artikel: 'artikel3', aantal: 7, klaar: true },
     { id:4,rij: 'D', rek: 40, artikel: 'artikel4', aantal: 1, klaar: true },
     { id:5,rij: 'E', rek: 50, artikel: 'artikel5', aantal: 9, klaar: false }
-];
+];*/
 const tbody= byId("bestellingenBody");
+
 function tableInvullen(data){
     data.forEach(item =>{
 
@@ -32,10 +33,11 @@ function tableInvullen(data){
 
         td = document.createElement('td');
         const a = document.createElement('a');
-        a.href = "overzichtArtikel.html"; // dat moet nog bespreken worden!
-        a.textContent = item.artikel;
+        a.href = "artikelDetail.html"; // dat moet nog bespreken worden!
+        a.textContent = item.naam;
         a.onclick= function (){
             sessionStorage.setItem('selectedArtikelId',item.id);
+            getCheckedCheckboxes();
         }
         td.appendChild(a);
         tr.appendChild(td);
@@ -65,5 +67,41 @@ function tableInvullen(data){
         }
     });
 }
-tableInvullen(data);
-setText("besteldId",dataBesteldId);
+
+function getCheckedCheckboxes() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    let selectedCheckedBoxes = [];
+    checkboxes.forEach((checkbox, index) => {
+        if (checkbox.checked) {
+            // console.log(`Checkbox ${index + 1} is checked`);
+            selectedCheckedBoxes.push(index + 1)
+        }
+    });
+    // console.log(selectedCheckedBoxes)
+    sessionStorage.setItem('checkboxes',JSON.stringify(selectedCheckedBoxes) );
+}
+
+function setCheckedCheckboxes() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    let selectedCheckedBoxes = (sessionStorage.getItem("checkboxes"));
+
+    checkboxes.forEach((checkbox, index) => {
+        if (selectedCheckedBoxes.includes(index+1)){
+            checkbox.checked = true;
+        }
+    });
+}
+
+/*tableInvullen(data);
+setText("bestelId",dataBesteldId);*/
+
+const response = await fetch("artikelen/vanOudsteBestellingen");
+if(response.ok){
+    const responsebody = await response.json();
+    setText("bestelId", responsebody.bestelId);
+    tableInvullen(responsebody.artikelLijn);
+} else {
+    toon("storing");
+}
+setCheckedCheckboxes()
