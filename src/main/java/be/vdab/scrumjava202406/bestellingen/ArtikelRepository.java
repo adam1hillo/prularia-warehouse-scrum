@@ -13,13 +13,13 @@ public class ArtikelRepository {
         this.jdbcClient = jdbcClient;
     }
 
-    void updateTotaleVoorraad(long artikelId, int voorraad) {
+    void updateTotaleVoorraad(long artikelId, NieuweVoorraad voorraad) {
         var sql = """
                 update Artikelen
                 set voorraad = ?
                 where artikelId = ?
                 """;
-        if (jdbcClient.sql(sql).params(voorraad, artikelId).update() == 0) {
+        if (jdbcClient.sql(sql).params(voorraad.voorraad(), artikelId).update() == 0) {
             throw new ArtikelNietGevondenException(artikelId);
         }
     }

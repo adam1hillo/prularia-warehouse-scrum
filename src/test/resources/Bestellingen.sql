@@ -1,0 +1,3 @@
+INSERT INTO Bestellingen (besteldatum, klantId, betaald, betalingscode, betaalwijzeId, annulatie, annulatiedatum, terugbetalingscode, bestellingsStatusId, actiecodeGebruikt, bedrijfsnaam, btwNummer, voornaam, familienaam, facturatieAdresId, leveringsAdresId)
+VALUES ( '2024-06-10 10:00:00' ,1,1,1234,1,0,null,null,2,0,'VDAB',1234,'test1','test1',1,5),
+       ( '2024-06-10 12:00:00' ,1,1,1234,1,0,null,null,3,0,'VDAB',1234,'test2','test2',1,5);
