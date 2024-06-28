@@ -66,6 +66,15 @@ class ArtikelControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    void patchVanVoorraadKleinerDanNulMislukt() throws Exception {
+        var jsonData = Files.readString(TEST_RESOURCES.resolve("voorraadKleinerDanNul.json"));
+        mockMvc.perform(patch("/bestelling/updateVoorraad/{artikelId}/voorraad", Long.MAX_VALUE)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonData))
+                .andExpect(status().isBadRequest());
+    }
+
 
     private int idVanTest1BestelId() {
         return jdbcClient.sql("select bestelId from bestellingen where familienaam = 'test1'")
