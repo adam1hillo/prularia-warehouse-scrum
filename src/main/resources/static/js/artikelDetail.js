@@ -3,7 +3,7 @@ import {byId, toon, verberg, setText} from "./util.js";
 
 verbergArtikelEnFouten();
 // todo get id from localStorage and pass it to the function
-//   const idVanArtikel = sessionStorage.getItem("selectedArtikelId");
+const idVanArtikel = sessionStorage.getItem("artikelId");
 
 toonArtikelDetail();
 
@@ -15,8 +15,8 @@ function verbergArtikelEnFouten() {
 
 
 async function toonArtikelDetail() {
-    //const response = await fetch(`artikels/${id}`);
-    const response = await fetch(`artikelen/6`);
+    const response = await fetch(`artikelen/${idVanArtikel}`);
+    //const response = await fetch(`artikelen/6`);
     if (response.ok) {
         const artikel = await response.json();
         toon("artikelTable");
