@@ -63,6 +63,8 @@ function tableInvullen(data){
                 tr.classList.remove("checked");
                 tr.style.background = "white";
             }
+
+            // console.log(checkedList.length !== data.length)
             const checkedList = document.getElementsByClassName("checked");
             byId("afgewerkt").disabled = checkedList.length !== data.length;
         }
@@ -88,8 +90,9 @@ function setCheckedCheckboxes() {
     let selectedCheckedBoxes = (sessionStorage.getItem("checkboxes"));
 
     checkboxes.forEach((checkbox, index) => {
-        if (selectedCheckedBoxes.includes(index+1)){
+                if (selectedCheckedBoxes.includes(index+1)){
             checkbox.checked = true;
+            checkbox.parentElement.parentElement.style.background = "#ABD7A8";
         }
     });
 }
@@ -102,7 +105,14 @@ if(response.ok){
     const responsebody = await response.json();
     setText("bestelId", responsebody.bestelId);
     tableInvullen(responsebody.artikelLijn);
+    setCheckedCheckboxes()
+    const checkedList = document.getElementsByClassName("checked");
+    byId("afgewerkt").disabled = JSON.parse(sessionStorage.getItem("checkboxes")).length !== responsebody.artikelLijn.length;
+
+
 } else {
     toon("storing");
 }
-setCheckedCheckboxes()
+
+
+

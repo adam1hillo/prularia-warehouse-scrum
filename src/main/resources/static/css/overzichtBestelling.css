@@ -1,0 +1,80 @@
+body {
+    background-color: #f9f9f9;
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+}
+#bestelling-overzicht .header {
+    background-color: #ABD7A8;
+    padding: 20px;
+}
+#bestelling-overzicht .header img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 80px;
+}
+
+#bestelling-overzicht .main-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+#bestelling-overzicht .sub-title {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+
+}
+
+#bestelling-overzicht .table-container {
+    width: 50%;
+    margin: 20px auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+
+}
+#bestelling-overzicht .table-container table {
+    width: 100%;
+    border-collapse: collapse;
+
+}#bestelling-overzicht .table-container table td {
+    border-top: 1px solid black;
+
+}
+
+#bestelling-overzicht table th, table td {
+    border: none;
+    padding: 4px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+#bestelling-overzicht .button-container {
+    text-align: center;
+    margin: 20px 0 20px 0;
+
+
+}
+
+#bestelling-overzicht .button-container button {
+    padding: 20px 40px;
+    background-color: #ABD7A8;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+}
+
+#bestelling-overzicht .button-container button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
