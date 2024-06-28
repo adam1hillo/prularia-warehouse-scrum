@@ -42,6 +42,7 @@ body, html {
     cursor: pointer;
     transition: background-color 0.3s;
     width: 200px; /* Fixed width for buttons */
+    border-radius: 1rem;
 }
 
 .order-button:hover {
