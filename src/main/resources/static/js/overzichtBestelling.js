@@ -66,7 +66,7 @@ function tableInvullen(data){
 
             // console.log(checkedList.length !== data.length)
             const checkedList = document.getElementsByClassName("checked");
-            byId("afgewerkt").disabled = checkedList.length !== data.length;
+            byId("afgewerkt").disabled = JSON.parse(sessionStorage.getItem("checkboxes")).length !== data.length;
         }
     });
 }
