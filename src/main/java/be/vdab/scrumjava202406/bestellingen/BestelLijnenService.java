@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -15,30 +16,29 @@ public class BestelLijnenService {
         this.BestellijnenRepository = BestellijnenRepository;
     }
 
-    public BestellingOmTePick findBestellingOmTePick() {
-        var pickLijst = new ArrayList<BestelIdLijstArtikelOmTePick>();
-        List<BestellingLijnenArtikelNaam> artikelList = BestellijnenRepository.bestellingLijnenArtikelNaam();
+    public Optional<BestellingOmTePicken> findBestellingOmTePicken() {
+        var pickLijst = new ArrayList<ArtikelIdNaamRijRekAantalBesteld>();
+        List<BestelLijnenArtikelNaam> artikelList = BestellijnenRepository.findOudsteBestelLijnenMetArtikelNaamEnId();
         if (artikelList.isEmpty()) {
-            return new BestellingOmTePick(-1, new ArrayList<>());
+            return Optional.empty();
         }
-        List<MagazijnplaatAantalMetArtikelId> artikelPlaats = BestellijnenRepository.magazijnplaatPerArtikelAndBestelId(artikelList.getFirst().bestelId());
+        List<MagazijnplaatsAantalMetArtikelId> artikelenPlaatsen = BestellijnenRepository.findAllMagazijnplaatsPerArtikelAndBestelId(artikelList.getFirst().bestelId());
 
-        
         artikelList.forEach(artikel -> {
             // Zoek de opslaglocaties voor het huidige artikel
-            var plaatsVanArtikel = artikelPlaats.stream()
-                    .filter(magazijnplaatAantalMetArtikelId -> magazijnplaatAantalMetArtikelId.artikelId() == artikel.artikelId())
+            var plaatsVanArtikel = artikelenPlaatsen.stream()
+                    .filter(magazijnplaatsAantalMetArtikelId -> magazijnplaatsAantalMetArtikelId.artikelId() == artikel.artikelId())
                     .toList();
-            // Vind de juiste locaties voor het aantal artikel nodig voor het bestel
-            int aantalenOmTePick = artikel.aantalBesteld();
-            for (MagazijnplaatAantalMetArtikelId magazijnplaatAantalMetArtikelId : plaatsVanArtikel) {
-                if (magazijnplaatAantalMetArtikelId.aantal() >= aantalenOmTePick) {
-                    var t = new BestelIdLijstArtikelOmTePick(magazijnplaatAantalMetArtikelId, artikel, aantalenOmTePick);
+            // Vind de juiste locaties voor het aantal artikelen nodig voor de bestelling
+            int aantalenOmTePicken = artikel.aantalBesteld();
+            for (MagazijnplaatsAantalMetArtikelId magazijnplaatsAantalMetArtikelId : plaatsVanArtikel) {
+                if (magazijnplaatsAantalMetArtikelId.aantal() >= aantalenOmTePicken) {
+                    var t = new ArtikelIdNaamRijRekAantalBesteld(magazijnplaatsAantalMetArtikelId, artikel, aantalenOmTePicken);
                     pickLijst.add(t);
                     break;
-                } else if(magazijnplaatAantalMetArtikelId.aantal() != 0){
-                    aantalenOmTePick -= magazijnplaatAantalMetArtikelId.aantal();
-                    var t = new BestelIdLijstArtikelOmTePick(magazijnplaatAantalMetArtikelId, artikel, aantalenOmTePick);
+                } else if(magazijnplaatsAantalMetArtikelId.aantal() != 0){
+                    aantalenOmTePicken -= magazijnplaatsAantalMetArtikelId.aantal();
+                    var t = new ArtikelIdNaamRijRekAantalBesteld(magazijnplaatsAantalMetArtikelId, artikel, aantalenOmTePicken);
                     pickLijst.add(t);
                 }
             }
@@ -52,7 +52,7 @@ public class BestelLijnenService {
                 return rijComparison;
             }
         });
-        return new BestellingOmTePick(artikelList.getFirst().bestelId(), pickLijst);
+        return Optional.of(new BestellingOmTePicken(artikelList.getFirst().bestelId(), pickLijst));
     }
 
 
