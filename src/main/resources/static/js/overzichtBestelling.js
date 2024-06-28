@@ -7,7 +7,7 @@ if(response1.ok){
 } else {
     toon("storing");
 }*/
-const dataBesteldId = 123456;
+/*const dataBesteldId = 123456;
 
 const data = [
     { id:1,rij: 'A', rek: 10, artikel: 'artikel1', aantal: 5, klaar: true },
