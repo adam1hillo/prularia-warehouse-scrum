@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 class ArtikelNietGevondenException extends RuntimeException {
-    ArtikelNietGevondenException(Integer id) {
+    ArtikelNietGevondenException(long id) {
         super("Artikel niet gevonden. Id: " + id);
     }
 }

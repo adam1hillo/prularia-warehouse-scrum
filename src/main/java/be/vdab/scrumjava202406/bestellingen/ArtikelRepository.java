@@ -7,14 +7,14 @@ import java.util.Optional;
 
 
 @Repository
-public class BestelRepository {
+public class ArtikelRepository {
     private final JdbcClient jdbcClient;
 
-    public BestelRepository(JdbcClient jdbcClient) {
+    public ArtikelRepository(JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
     }
 
-    void updateTotaleVoorraad(Integer artikelId, Integer voorraad) {
+    void updateTotaleVoorraad(long artikelId, int voorraad) {
         var sql = """
                 update Artikelen
                 set voorraad = ?
@@ -24,7 +24,7 @@ public class BestelRepository {
             throw new ArtikelNietGevondenException(artikelId);
         }
     }
-    record BestelId(int bestelId) {
+    record BestelId(long bestelId) {
     }
 
     Optional<BestelId> findAndLockByBesteId(int bestelId) {
@@ -43,7 +43,7 @@ public class BestelRepository {
                 where bestelId = ?
                 """;
         if (jdbcClient.sql(sql).param(bestelId).update() == 0){
-            throw new BestellingNietGevondenException(bestelId);
+            throw new ArtikelNietGevondenException(bestelId);
         }
     }
 }

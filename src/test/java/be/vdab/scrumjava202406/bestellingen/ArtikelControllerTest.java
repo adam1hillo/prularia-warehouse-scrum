@@ -20,21 +20,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @Sql({"/artikelen.sql","/bestellingen.sql"})
 @AutoConfigureMockMvc
-class BestelControllerTest {
+class ArtikelControllerTest {
     private final static String ARTIKELEN_TABLE = "Artikelen";
     private final static String BESTELLINGEN_TABLE = "bestellingen";
 
     private final MockMvc mockMvc;
     private final JdbcClient jdbcClient;
 
-    public BestelControllerTest(MockMvc mockMvc, JdbcClient jdbcClient) {
+    public ArtikelControllerTest(MockMvc mockMvc, JdbcClient jdbcClient) {
         this.mockMvc = mockMvc;
         this.jdbcClient = jdbcClient;
     }
 
-    private Integer idVanTest1Artikel() {
+    private long idVanTest1Artikel() {
         return jdbcClient.sql("select artikelId from Artikelen where naam = 'test1'")
-                .query(Integer.class)
+                .query(long.class)
                 .single();
     }
 

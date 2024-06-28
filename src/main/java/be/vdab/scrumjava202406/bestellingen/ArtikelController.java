@@ -1,20 +1,18 @@
 package be.vdab.scrumjava202406.bestellingen;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("bestelling")
-class BestelController {
-    private final BestelService bestelService;
+class ArtikelController {
+    private final ArtikelService bestelService;
 
-    public BestelController(BestelService bestelService) {
+    public ArtikelController(ArtikelService bestelService) {
         this.bestelService = bestelService;
     }
 
     @PatchMapping("updateVoorraad/{artikelId}/{voorraad}")
-    void updateTotaleVoorraad(@PathVariable Integer artikelId,
+    void updateTotaleVoorraad(@PathVariable long artikelId,
                    @PathVariable Integer voorraad) {
         bestelService.updateTotaleVoorraad(artikelId, voorraad);
     }
