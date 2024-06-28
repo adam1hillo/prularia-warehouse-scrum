@@ -1,0 +1,58 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    font-family: Arial, serif;
+}
+
+.banner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
+    background-color: #ABD7A8;
+}
+
+.logo{
+    width: 20rem;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+}
+
+.message-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    height: 100%;
+    color: #151515;
+    font-size: 1.2rem;
+}
+
+.button-confirm{
+    background-color: #ABD7A8;
+    color: #151515;
+    font-size: 2rem;
+    font-weight: bold;
+    width:30rem;
+    height: 9rem;
+    border-radius: 2rem;
+    border:5px solid #151515;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.button-confirm:hover{
+    background-color: #d5ecd3;
+}
+
+.mr-4{
+    margin-right: 4rem;
+}

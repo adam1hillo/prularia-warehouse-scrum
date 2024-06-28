@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Prularia Magazijn-Overzicht Bestelling</title>
+    <script src="js/overzichtBestelling.js" type="module" defer></script>
+    <link rel="icon" href="images/prularia.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/overzichtBestelling.css">
+</head>
+<body>
+<div id="bestelling-overzicht">
+<div class="header">
+    <img src="./images/logo_prularia_wit.png" alt="Prularia">
+</div>
+
+    <div class="sub-title">Op te pikken artikelen voor bestelling</div>
+    <div class="main-title" id="bestelId" ></div>
+
+
+<!-- <div><a href="index.html">Menu Prularia Magazijn</a></div>-->
+    <div class="table-container">
+<table>
+    <thead>
+    <tr>
+        <th>Rij</th>
+        <th>Rek</th>
+        <th>Artikel</th>
+        <th>Aantal</th>
+        <th>klaar</th>
+    </tr>
+    </thead>
+    <tbody id="bestellingenBody">
+
+    </tbody>
+</table>
+    </div>
+<div id="button" class="button-container">
+    <button id="afgewerkt" disabled>Afgewerkt</button>
+
+</div>
+
+
+
+
+
+<div id="nietGevonden" class="fout" hidden>Bestelling niet gevonden.</div>
+<div id="storing" class="fout" hidden>Storing, contacteer helpdesk.</div>
+</div>
+</body>
+</html>
