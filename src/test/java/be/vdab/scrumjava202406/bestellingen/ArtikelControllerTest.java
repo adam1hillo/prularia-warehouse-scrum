@@ -10,18 +10,18 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @Transactional
-@Sql("/artikelen2.sql")
+//@Sql("/artikelen2.sql")
 @Sql("/Artikelen.sql")
 @Sql("/MagazijnPlaatsen.sql")
 @AutoConfigureMockMvc
@@ -50,13 +50,15 @@ class ArtikelControllerTest {
     void patchWijzigtDeTotaleVoorraadVanHetArtikel() throws Exception {
         var jsonData = Files.readString(TEST_RESOURCES.resolve("correcteVoorraad.json"));
         var artikelId = idVanTest1Artikel();
-        mockMvc.perform(patch("/bestelling/updateVoorraad/{id}/aantal", artikelId)
+        System.out.println(artikelId);
+        System.out.println(jsonData);
+        mockMvc.perform(patch("/artikelen/updateVoorraad/{id}/aantal", artikelId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonData))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
         assertThat(JdbcTestUtils.countRowsInTableWhere(jdbcClient, ARTIKELEN_TABLE,
-                "voorraad = 22 and artikelId = " + artikelId)).isOne();
+                "voorraad = 20 and artikelId = " + artikelId)).isOne();
     }
 
     // grant insert on Artikelen to Javagebruiker --> in creeerDatabaseMetDataPrulariaPuntComMySQL2023.sql plaatsen
@@ -97,7 +99,7 @@ class ArtikelControllerTest {
     @Test
     void patchWijzigtDeMagazijnPlaatsVoorraad() throws Exception {
         var jsonData = Files.readString(TEST_RESOURCES.resolve("CorrecteRijRekNieuweAantal.json"));
-        mockMvc.perform(patch("/bestelling/updateVoorraad/plaats")
+        mockMvc.perform(patch("/artikelen/updateVoorraad/plaats")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonData))
                 .andExpect(status().isOk())
