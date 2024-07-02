@@ -5,6 +5,18 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
+select, input {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #666666;
+    height: 55px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+
 .container {
     display: flex;
     flex-direction: column;
@@ -12,31 +24,44 @@ body, html {
     height: 100vh;
 }
 
-.input-container{
+.input-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: red;
-    border: 3px solid red;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
-.input-wrapper{
+.input-wrapper {
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: center;
-    width: 60%;
+    width: 80%;
 }
 
-.invoerData{
+.invoerData {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 1rem;
 }
 
-.label-input{
+label {
+    margin-bottom: 10px;
+}
+
+.label-input {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+}
+
+.label-input label {
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 
 
@@ -54,12 +79,6 @@ body, html {
     max-width: 100%;
 }
 
-.totaalBestellingen {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
 
 .toegevoegdeArtikelen {
     display: flex;
@@ -70,7 +89,7 @@ body, html {
 
 .fout {
     background-color: red;
-    color:white;
+    color: white;
     font-weight: bold;
     padding-left: 0.5em;
     padding-right: 0.5em;
@@ -80,7 +99,7 @@ body, html {
     border-radius: 10px;
     overflow: hidden; /* Ensures the rounded corners are visible */
     border: 1px solid black;
-    width: 60%;
+    width: 80%;
 }
 
 table {
@@ -106,22 +125,28 @@ th {
     font-size: 1.5rem;
 }
 
-tbody{
-    font-weight: 600;
+tbody {
+    font-weight: 400;
     font-size: 1.3rem;
 }
-tr{
+
+tr {
     padding-bottom: 6px;
     padding-top: 6px;
 }
+
 thead tr {
     border-bottom: 1px solid black;
 }
-tbody tr:last-child{border-bottom: 0;}
 
-tbody tr{
+tbody tr:last-child {
+    border-bottom: 0;
+}
+
+tbody tr {
     border-bottom: 1px solid black;
 }
+
 .button-container {
     text-align: center;
     margin: 20px 0 20px 0;
@@ -129,7 +154,7 @@ tbody tr{
 
 }
 
-.button-container button {
+.button {
     padding: 20px 40px;
     background-color: #ABD7A8;
     border-radius: 5px;
@@ -139,5 +164,23 @@ tbody tr{
     text-decoration: none;
     color: black;
     border: 1px solid black;
+    transition: 0.2s;
 }
 
+.button:hover {
+    background-color: #c1e6be;
+}
+
+.button-smaller {
+    height: 60px;
+    font-size: 1.2rem;
+}
+
+.input-smaller {
+    width: 4.3rem;
+}
+
+.align-input-left {
+    justify-content: flex-start;
+    gap: 2rem;
+}

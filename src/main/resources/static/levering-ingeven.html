@@ -16,8 +16,7 @@
 
     <div class="input-container">
         <div class="input-wrapper">
-            <div class="invoerData">
-
+            <div class="invoerData align-input-left">
                 <div class="label-input">
                     <label>Leverancier</label>
                     <select name="leverancier" id="leverancier-select">
@@ -27,36 +26,43 @@
 
                 <div class="label-input">
                     <label>Leveringsbon-nummer</label>
-                    <input type="text">
-                <div>
+                    <input type="text" placeholder="xxxx/xxx">
+                </div>
 
                 <div class="label-input">
                     <label>Leveringsbon-datum</label>
                     <input type="date">
-                <div>
+                </div>
 
                 <div class="label-input">
                     <label>Leverdatum</label>
                     <input type="date">
-                <div>
+                </div>
             </div>
 
-            <div class="invoerData">
-                <label>Artikel EAN-Code
-                    <input type="number" min="1000" max="99999">
-                </label>
-                <label>Aantal
-                    <input type="number" min="1">
-                </label>
-                <button id="artikelToevoegen">Voeg artikel toe</button>
+            <div class="invoerData align-input-left">
+
+                <div class="label-input">
+                    <label>Artikel EAN-Code</label>
+                    <input type="number" min="1000" max="99999" placeholder="00000">
+                </div>
+
+                <div class="label-input">
+                    <label>Aantal</label>
+                    <input class="input-smaller" type="number" min="1" placeholder="0">
+                </div>
+
+                <div class="label-input">
+                    <button class="button button-smaller" id="artikelToevoegen">Voeg artikel toe</button>
+                </div>
             </div>
         </div>
     </div>
 
 
-
     <div class="toegevoegdeArtikelen">
 
+        <!--  De table is hidden wanneer er nog geen artikelen zijn ingegeven. -->
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -69,12 +75,27 @@
                 </tr>
                 </thead>
                 <tbody id="toegevoedgdeArtikelenBody">
+                <!-- mock data, kan verwijderd worden indien js klaar is-->
+                <tr>
+                    <td>156546514</td>
+                    <td>Hamer</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>156546514</td>
+                    <td>Hamer</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <div id="buttonAfgewerkt" class="button-container">
-        <button id="afgewerkt" disabled>Afgewerkt</button>
+        <button class="button">Afgewerkt</button>
     </div>
     <div id="storing" class="fout" hidden>Storing, contacteer helpdesk.</div>
 </div>
