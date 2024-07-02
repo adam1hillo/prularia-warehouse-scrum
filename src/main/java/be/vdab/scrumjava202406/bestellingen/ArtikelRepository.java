@@ -24,4 +24,14 @@ public class ArtikelRepository {
                 .query(Artikel.class)
                 .optional();
     }
+
+    Optional<Long> findArtikelIdByEanLastFive(int eanLastFive) {
+        var sql = """
+                select artikelId from artikelen where ean like '%?';
+                """;
+        return jdbcClient.sql(sql)
+                .param(eanLastFive)
+                .query(Long.class)
+                .optional();
+    }
 }
