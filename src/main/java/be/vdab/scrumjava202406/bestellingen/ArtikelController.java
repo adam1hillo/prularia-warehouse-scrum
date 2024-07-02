@@ -1,9 +1,9 @@
 package be.vdab.scrumjava202406.bestellingen;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -39,5 +39,13 @@ public class ArtikelController {
         return artikelService.findById(id)
                 .map(ArtikelMetPlaatsenDTO::new)
                 .orElseThrow(() -> new ArtikelNietGevondenException(id));
+    }
+    @PatchMapping("updateVoorraad/{artikelId}/aantal")
+    void updateTotaleVoorraad(@PathVariable long artikelId, @RequestBody @Valid AanpassingVoorraadMetAantal aantal) {
+        artikelService.updateTotaleVoorraad(artikelId, aantal);
+    }
+    @PatchMapping("updateVoorraad/plaats")
+    void updateArtikelVoorraadPerPlaats(@RequestBody @Valid List<RijRekNieuweAantal> rijRekNieuweAantalLijst) {
+        artikelService.updateArtikelVoorraadPerPlaats(rijRekNieuweAantalLijst);
     }
 }

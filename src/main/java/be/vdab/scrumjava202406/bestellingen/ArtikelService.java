@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -16,5 +17,15 @@ public class ArtikelService {
 
     Optional<Artikel> findById(long id) {
         return artikelRepository.findById(id);
+    }
+@Transactional
+void updateTotaleVoorraad(long artikelId, AanpassingVoorraadMetAantal aantal) {
+    artikelRepository.updateTotaleVoorraadPerArtikel(artikelId, aantal);
+}
+
+
+@Transactional
+    void updateArtikelVoorraadPerPlaats(List<RijRekNieuweAantal> rijRekNieuweAantalLijst) {
+        rijRekNieuweAantalLijst.forEach(artikelRepository::updateMagazijnVoorraad);
     }
 }

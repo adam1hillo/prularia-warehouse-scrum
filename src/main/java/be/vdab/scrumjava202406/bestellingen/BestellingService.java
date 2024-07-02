@@ -1,5 +1,6 @@
 package be.vdab.scrumjava202406.bestellingen;
 
+import be.vdab.scrumjava202406.util.BestellingNietGevondenException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -7,6 +8,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -33,5 +36,14 @@ public class BestellingService {
                     BigDecimal.valueOf(bestellingMetAantalEnGewicht.totaleGewicht()).divide(BigDecimal.valueOf(1000), 2, RoundingMode.HALF_UP)));
         }
         return resultBestellingen;
+    }
+    @Transactional
+    void updateBestellingStatusToOnderweg(int bestelId){
+        Optional<BestelIdDTO> lockedBestelId = bestellingRepository.findAndLockByBestelId(bestelId);
+        if (lockedBestelId.isPresent()) {
+            bestellingRepository.updateBestellingStatus(bestelId);
+        } else {
+            throw new BestellingNietGevondenException(bestelId);
+        }
     }
 }

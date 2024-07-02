@@ -1,8 +1,8 @@
 package be.vdab.scrumjava202406.bestellingen;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -23,5 +23,9 @@ public class BestellingController {
     @GetMapping("aantal")
     long findCount() {
         return bestellingService.aantalKlaarOmGepickt();
+    }
+    @PatchMapping("updateStatusOnderweg/{bestelId}")
+    void updateBestellingStatusToOnderweg(@PathVariable int bestelId){
+        bestellingService.updateBestellingStatusToOnderweg(bestelId);
     }
 }

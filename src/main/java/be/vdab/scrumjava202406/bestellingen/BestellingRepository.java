@@ -3,6 +3,7 @@ package be.vdab.scrumjava202406.bestellingen;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.List;
 
 @Repository
@@ -12,6 +13,7 @@ public class BestellingRepository {
     private final JdbcClient jdbcClient;
 
     public BestellingRepository(JdbcClient jdbcClient) {
+    BestellingRepository(JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
     }
 
@@ -38,4 +40,23 @@ public class BestellingRepository {
                 """;
         return (long) jdbcClient.sql(sql).param(BETAALD_STATUS_ID).query().singleValue();
     }
+        Optional<BestelIdDTO> findAndLockByBestelId(long bestelId) {
+            var sql = """
+                select bestelId
+                from Bestellingen
+                where bestelId = ?
+                for update
+                """;
+            return jdbcClient.sql(sql).param(bestelId).query(BestelIdDTO.class).optional();
+        }
+        void updateBestellingStatus(long bestelId) {
+            String sql = """
+                update Bestellingen
+                set bestellingsStatusId = 5
+                where bestelId = ?
+                """;
+            if (jdbcClient.sql(sql).param(bestelId).update() == 0) {
+                throw new BestellingNietGevondenException(bestelId);
+            }
+        }
 }
