@@ -46,7 +46,7 @@ class ArtikelControllerTest {
     void patchWijzigtDeTotaleVoorraadVanHetArtikel() throws Exception {
         var jsonData = Files.readString(TEST_RESOURCES.resolve("correcteVoorraad.json"));
         var artikelId = idVanTest1Artikel();
-        mockMvc.perform(patch("/bestelling/updateVoorraad/{id}/voorraad", artikelId)
+        mockMvc.perform(patch("/bestelling/updateVoorraad/{id}/aantal", artikelId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonData))
                 .andExpect(status().isOk())
@@ -59,7 +59,7 @@ class ArtikelControllerTest {
     @Test
     void patchVanOnbestaandArtikelMislukt() throws Exception {
         var jsonData = Files.readString(TEST_RESOURCES.resolve("correcteVoorraad.json"));
-        mockMvc.perform(patch("/bestelling/updateVoorraad/{artikelId}/voorraad", Long.MAX_VALUE)
+        mockMvc.perform(patch("/bestelling/updateVoorraad/{artikelId}/aantal", Long.MAX_VALUE)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonData))
                 .andExpect(status().isNotFound());

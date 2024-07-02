@@ -15,8 +15,8 @@ class ArtikelService {
     }
 
     @Transactional
-    void updateTotaleVoorraad(long artikelId, NieuweVoorraad voorraad) {
-        artikelRepository.updateTotaleVoorraad(artikelId, voorraad);
+    void updateTotaleVoorraad(long artikelId, AanpassingVoorraadMetAantal aantal) {
+        artikelRepository.updateTotaleVoorraadPerArtikel(artikelId, aantal);
     }
 
     @Transactional

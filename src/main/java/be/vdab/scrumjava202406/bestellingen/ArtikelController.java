@@ -14,9 +14,9 @@ class ArtikelController {
         this.artikelService = artikelService;
     }
 
-    @PatchMapping("updateVoorraad/{artikelId}/voorraad")
-    void updateTotaleVoorraad(@PathVariable long artikelId, @RequestBody @Valid NieuweVoorraad nieuweVoorraad) {
-        artikelService.updateTotaleVoorraad(artikelId, nieuweVoorraad);
+    @PatchMapping("updateVoorraad/{artikelId}/aantal")
+    void updateTotaleVoorraad(@PathVariable long artikelId, @RequestBody @Valid AanpassingVoorraadMetAantal aantal) {
+        artikelService.updateTotaleVoorraad(artikelId, aantal);
     }
 
     @PatchMapping("updateVoorraad/plaats")
