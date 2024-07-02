@@ -22,7 +22,7 @@ public class InkomendeLeveringController {
     void nieuweInkomendeLeveringsLijn(
             @PathVariable long inkomendeLeveringsId,
             @RequestBody @Valid NieuweInkomendeLeveringsLijn nieuweInkomendeLeveringsLijn) {
-        inkomendeLeveringService.nieuweInkomendeLevering(inkomendeLeveringsId, nieuweInkomendeLeveringsLijn);
+        inkomendeLeveringService.nieuweInkomendeLeveringsLijn(inkomendeLeveringsId, nieuweInkomendeLeveringsLijn);
     }
 
 
