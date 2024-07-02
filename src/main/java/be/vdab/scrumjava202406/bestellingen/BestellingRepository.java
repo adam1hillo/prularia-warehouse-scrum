@@ -1,10 +1,11 @@
 package be.vdab.scrumjava202406.bestellingen;
 
+import be.vdab.scrumjava202406.util.BestellingNietGevondenException;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class BestellingRepository {
@@ -13,7 +14,6 @@ public class BestellingRepository {
     private final JdbcClient jdbcClient;
 
     public BestellingRepository(JdbcClient jdbcClient) {
-    BestellingRepository(JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
     }
 

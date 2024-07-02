@@ -2,12 +2,9 @@ package be.vdab.scrumjava202406.bestellingen;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("artikelen")
@@ -27,13 +24,6 @@ public class ArtikelController {
                     );
         }
     }
-
-    /*@GetMapping("{id}")
-    Artikel findById(@PathVariable long id) {
-        return artikelService.findById(id)
-                .orElseThrow(() -> new ArtikelNietGevondenException(id));
-    }*/
-
     @GetMapping("{id}")
     ArtikelMetPlaatsenDTO findById(@PathVariable long id) {
         return artikelService.findById(id)
