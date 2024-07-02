@@ -23,4 +23,14 @@ public class ArtikelRepository {
             throw new ArtikelNietGevondenException(artikelId);
         }
     }
+
+    void updateMagazijnVoorraad(RijRekNieuweAantal rijRekNieuweAantal) {
+        var sql = """
+                UPDATE MagazijnPlaatsen
+                SET aantal = aantal - ?
+                WHERE rij = ? AND rek = ?
+                """;
+
+        jdbcClient.sql(sql).params(rijRekNieuweAantal.aantal(), String.valueOf(rijRekNieuweAantal.rij()), rijRekNieuweAantal.rek()).update();
+    }
 }
