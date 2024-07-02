@@ -9,8 +9,6 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.file.Path;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,7 +28,7 @@ public class BestellingControllerTest {
         this.jdbcClient = jdbcClient;
     }
     private int idVanTest1BestelId() {
-        return jdbcClient.sql("select bestelId from bestellingen where familienaam = 'test1'")
+        return jdbcClient.sql("select bestelId from Bestellingen where familienaam = 'test1'")
                 .query(Integer.class)
                 .single();
     }
