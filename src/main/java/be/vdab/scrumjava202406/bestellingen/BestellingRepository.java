@@ -17,7 +17,7 @@ public class BestellingRepository {
     Optional<BestelIdDTO> findAndLockByBestelId(long bestelId) {
         var sql = """
                 select bestelId
-                from bestellingen
+                from Bestellingen
                 where bestelId = ?
                 for update
                 """;
@@ -26,7 +26,7 @@ public class BestellingRepository {
 
     void updateBestellingStatus(long bestelId) {
         String sql = """
-                update bestellingen
+                update Bestellingen
                 set bestellingsStatusId = 5
                 where bestelId = ?
                 """;

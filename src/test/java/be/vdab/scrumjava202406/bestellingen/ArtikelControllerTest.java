@@ -71,7 +71,7 @@ class ArtikelControllerTest {
         mockMvc.perform(patch("/bestelling/updateVoorraad/{artikelId}/voorraad", Long.MAX_VALUE)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonData))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound());
     }
 
     @Test
