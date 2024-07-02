@@ -8,6 +8,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -17,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql({"/bestellingen.sql", "/artikelen.sql", "/bestellijnen.sql"})
 @AutoConfigureMockMvc
 public class BestellingControllerTest {
-    private final static String BESTELLINGEN_TABLE = "bestellingen";
+    private final static String BESTELLINGEN_TABLE = "Bestellingen";
     private final MockMvc mockMvc;
     private final JdbcClient jdbcClient;
     BestellingControllerTest(MockMvc mockMvc, JdbcClient jdbcClient) {
@@ -26,7 +27,7 @@ public class BestellingControllerTest {
     }
 
     private long idVanOudsteBestelling() {
-        var sql = "select bestelId from bestellingen WHERE year(besteldatum) = 1900 and month(besteldatum) = 1";
+        var sql = "select bestelId from Bestellingen WHERE year(besteldatum) = 1900 and month(besteldatum) = 1";
         return jdbcClient.sql(sql).query(Long.class).single();
     }
 

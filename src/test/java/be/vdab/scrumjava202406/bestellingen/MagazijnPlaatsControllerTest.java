@@ -9,9 +9,9 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @SpringBootTest
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class MagazijnPlaatsControllerTest {
 
-    private final static String MAGAZIJNPLAATSEN_TABLE = "magazijnplaatsen";
+    private final static String MAGAZIJNPLAATSEN_TABLE = "MagazijnPlaatsen";
     private final MockMvc mockMvc;
     private final JdbcClient jdbcClient;
 
@@ -30,7 +30,7 @@ class MagazijnPlaatsControllerTest {
     }
 
    private long idVanTest1Artikel() {
-        return jdbcClient.sql("select artikelId from artikelen where naam = 'test1'")
+        return jdbcClient.sql("select artikelId from Artikelen where naam = 'test1'")
                 .query(Long.class)
                 .single();
     }

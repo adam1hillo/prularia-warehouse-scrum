@@ -1,4 +1,4 @@
-insert into artikelen(naam, gewichtInGram, prijs, beschrijving, ean, leveranciersId) values
+insert into Artikelen(naam, gewichtInGram, prijs, beschrijving, ean, leveranciersId) values
 ('testartikel1', 1, 10.0, 'test', 'test', 1),
 ('testartikel2', 2, 10.0, 'test', 'test', 1),
 ('testartikel3', 3, 10.0, 'test', 'test', 1),

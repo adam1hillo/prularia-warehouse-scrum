@@ -8,11 +8,9 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @Transactional
@@ -20,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureMockMvc
 class ArtikelControllerTest {
 
-    private final static String ARTIKELEN_TABLE = "artikelen";
+    private final static String ARTIKELEN_TABLE = "Artikelen";
     private final MockMvc mockMvc;
     private final JdbcClient jdbcClient;
 
@@ -30,7 +28,7 @@ class ArtikelControllerTest {
     }
 
     private long idVanTest1Artikel() {
-        return jdbcClient.sql("select artikelId from artikelen where naam = 'test1'")
+        return jdbcClient.sql("select artikelId from Artikelen where naam = 'test1'")
                 .query(Long.class)
                 .single();
     }
