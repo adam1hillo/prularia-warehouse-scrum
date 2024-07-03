@@ -29,6 +29,12 @@ public class ArtikelController {
         }
     }
 
+    private record ArtikelNaamEnId(String naam, long artikelId) {
+        ArtikelNaamEnId(Artikel artikel) {
+            this(artikel.getNaam(), artikel.getArtikelId());
+        }
+    }
+
     /*@GetMapping("{id}")
     Artikel findById(@PathVariable long id) {
         return artikelService.findById(id)
@@ -42,9 +48,10 @@ public class ArtikelController {
                 .orElseThrow(() -> new ArtikelNietGevondenException(id));
     }
 
-    @GetMapping("{eanLastFive}")
-    ArtikelNaamEnId findArtikelNaamByEanLastFive(@PathVariable int eanLastFive) {
-        return artikelService.findArtikelNaamEnIdByEanLastFive(eanLastFive)
+    @GetMapping("metEanLastFive/{eanLastFive}")
+    ArtikelNaamEnId findArtikelNaamByEanLastFive(@PathVariable String eanLastFive) {
+        return artikelService.findByEanLastFive(eanLastFive)
+                .map(ArtikelNaamEnId::new)
                 .orElseThrow(() -> new ArtikelNietGevondenException(eanLastFive));
     }
 }

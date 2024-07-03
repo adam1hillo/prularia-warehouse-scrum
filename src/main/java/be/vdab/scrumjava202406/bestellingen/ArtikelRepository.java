@@ -25,13 +25,16 @@ public class ArtikelRepository {
                 .optional();
     }
 
-    Optional<ArtikelNaamEnId> findArtikelNaamEnIdByEanLastFive(int eanLastFive) {
+    Optional<Artikel> findByEanLastFive(String eanLastFive) {
         var sql = """
-                select naam, artikelId from artikelen where ean like '%?';
-                """;
+               select artikelId, ean, naam,beschrijving,prijs,gewichtInGram,bestelpeil,voorraad,minimumVoorraad,maximumVoorraad,levertijd,aantalBesteldLeverancier,maxAantalInMagazijnPlaats,leveranciersId
+               from Artikelen
+               where ean like ?
+               """;
+        String like = "%" + eanLastFive;
         return jdbcClient.sql(sql)
-                .param(eanLastFive)
-                .query(ArtikelNaamEnId.class)
+                .param(like)
+                .query(Artikel.class)
                 .optional();
     }
 }

@@ -18,7 +18,7 @@ public class ArtikelService {
         return artikelRepository.findById(id);
     }
 
-    Optional<ArtikelNaamEnId> findArtikelNaamEnIdByEanLastFive(int eanLastFive) {
-        return artikelRepository.findArtikelNaamEnIdByEanLastFive(eanLastFive);
+    Optional<Artikel> findByEanLastFive(String eanLastFive) {
+        return artikelRepository.findByEanLastFive(eanLastFive);
     }
 }
