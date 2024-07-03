@@ -44,16 +44,20 @@
 
                 <div class="label-input">
                     <label>Artikel EAN-Code</label>
-                    <input type="number" min="1000" max="99999" placeholder="00000">
+                    <input id="ean" type="number" min="10000" max="99999" placeholder="00000">
                 </div>
 
                 <div class="label-input">
                     <label>Aantal</label>
-                    <input class="input-smaller" type="number" min="1" placeholder="0">
+                    <input id="aantal" class="input-smaller" type="number" min="1" placeholder="0" required>
                 </div>
 
                 <div class="label-input">
                     <button class="button button-smaller" id="artikelToevoegen">Voeg artikel toe</button>
+                </div>
+                <div class="label-input">
+                    <div id="verkeerdeEAN" class="fout" hidden>Veerkeerde EAN-Code, artikel bestaat niet.</div>
+                    <div id="verkeerdeAantal" class="fout" hidden>Verkeerde aantal. Moet minstens 1 zijn</div>
                 </div>
             </div>
         </div>
@@ -63,7 +67,7 @@
     <div class="toegevoegdeArtikelen">
 
         <!--  De table is hidden wanneer er nog geen artikelen zijn ingegeven. -->
-        <div class="table-wrapper">
+        <div id="table-wrapper" class="table-wrapper" hidden>
             <table>
                 <thead>
                 <tr>
@@ -74,28 +78,13 @@
                     <th># Afgekeurd</th>
                 </tr>
                 </thead>
-                <tbody id="toegevoedgdeArtikelenBody">
-                <!-- mock data, kan verwijderd worden indien js klaar is-->
-                <tr>
-                    <td>156546514</td>
-                    <td>Hamer</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>156546514</td>
-                    <td>Hamer</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>1</td>
-                </tr>
+                <tbody id="toegevoegdeArtikelenBody">
                 </tbody>
             </table>
         </div>
     </div>
-    <div id="buttonAfgewerkt" class="button-container">
-        <button class="button">Afgewerkt</button>
+    <div id="buttonVolgende" class="button-container" hidden>
+        <button class="button">Volgende</button>
     </div>
     <div id="storing" class="fout" hidden>Storing, contacteer helpdesk.</div>
 </div>
