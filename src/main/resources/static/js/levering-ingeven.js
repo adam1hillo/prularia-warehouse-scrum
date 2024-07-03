@@ -2,9 +2,6 @@
 
 import {byId, toon, verberg} from "./util.js";
 
-const leverancierInput = byId("leverancier-select");
-
-
 await getLeveranciers();
 byId("artikelToevoegen").onclick = voegArtikelToe;
 
@@ -52,6 +49,7 @@ async function voegArtikelToe() {
         const artikelenBody = byId("toegevoegdeArtikelenBody");
         const tr = artikelenBody.insertRow();
         tr.id = artikel.ean;
+        tr.addEventListener('click', (e) => handleClickRow(e));
         const eanCodeTd = document.createElement("td");
         eanCodeTd.innerText = artikel.ean;
         tr.appendChild(eanCodeTd);
@@ -70,9 +68,10 @@ async function voegArtikelToe() {
         goedgekeurdInput.min = 0;
         goedgekeurdInput.max = Number(aantalTd.innerText);
         goedgekeurdInput.type = "number";
+        goedgekeurdInput.placeholder = 0;
         goedgekeurdInput.classList.add("input-smaller");
 
-        goedgekeurdInput.addEventListener('change', (e) => handleChangeGoedgekeurd(e));
+        goedgekeurdInput.addEventListener('input', (e) => handleChangeGoedgekeurd(e));
 
         goedgekeurdTd.appendChild(goedgekeurdInput);
         tr.appendChild(goedgekeurdTd);
@@ -97,6 +96,14 @@ function handleChangeGoedgekeurd(e) {
     updateAfgekeurdValue(e);
 }
 
+function handleClickRow(e) {
+    const selectedRow = e.target.parentElement;
+
+    if (e.ctrlKey) {
+        deleteRow(selectedRow);
+    }
+}
+
 function updateAfgekeurdValue(e) {
     const rowElement = e.target.parentElement.parentNode;
     const afgekeurdTd = rowElement.lastChild;
@@ -104,4 +111,8 @@ function updateAfgekeurdValue(e) {
     const aantalArtikelen = Number(rowElement.childNodes.item(2).innerText);
 
     afgekeurdTd.innerText = aantalArtikelen - Number(goedgekeurdInput.value);
+}
+
+function deleteRow(rowElement) {
+    rowElement.remove();
 }
