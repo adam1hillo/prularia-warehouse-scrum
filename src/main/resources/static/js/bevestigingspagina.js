@@ -21,7 +21,8 @@ function setMessage(message){
 
 function handleClickNext(event){
     // Add button logic here
-    alert("Geklikt op volgende");
+
+    window.location.href= "overzichtBestelling.html";
     console.log(event);
 }
 
