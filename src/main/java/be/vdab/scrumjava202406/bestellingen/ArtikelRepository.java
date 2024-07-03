@@ -25,13 +25,13 @@ public class ArtikelRepository {
                 .optional();
     }
 
-    Optional<Long> findArtikelIdByEanLastFive(int eanLastFive) {
+    Optional<ArtikelNaamEnId> findArtikelNaamEnIdByEanLastFive(int eanLastFive) {
         var sql = """
-                select artikelId from artikelen where ean like '%?';
+                select naam, artikelId from artikelen where ean like '%?';
                 """;
         return jdbcClient.sql(sql)
                 .param(eanLastFive)
-                .query(Long.class)
+                .query(ArtikelNaamEnId.class)
                 .optional();
     }
 }

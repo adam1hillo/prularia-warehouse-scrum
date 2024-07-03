@@ -7,17 +7,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("artikelen")
 public class ArtikelController {
     private final ArtikelService artikelService;
     private static MagazijnPlaatsService magazijnPlaatsService = null;
+    private final ArtikelRepository artikelRepository;
 
-    public ArtikelController(ArtikelService artikelService,MagazijnPlaatsService magazijnPlaatsService) {
+    public ArtikelController(ArtikelService artikelService, MagazijnPlaatsService magazijnPlaatsService, ArtikelRepository artikelRepository) {
         this.artikelService = artikelService;
         this.magazijnPlaatsService = magazijnPlaatsService;
+        this.artikelRepository = artikelRepository;
     }
 
     private record ArtikelMetPlaatsenDTO(long artikelId, String naam, BigDecimal prijs, long gewichtInGram, int voorraad, int maximumVoorraad, int maxAantalInMagazijnPlaats, List<MagazijnPlaats> magazijnPlaatsen) {
@@ -39,5 +40,11 @@ public class ArtikelController {
         return artikelService.findById(id)
                 .map(ArtikelMetPlaatsenDTO::new)
                 .orElseThrow(() -> new ArtikelNietGevondenException(id));
+    }
+
+    @GetMapping("{eanLastFive}")
+    ArtikelNaamEnId findArtikelNaamByEanLastFive(@PathVariable int eanLastFive) {
+        return artikelService.findArtikelNaamEnIdByEanLastFive(eanLastFive)
+                .orElseThrow(() -> new ArtikelNietGevondenException(eanLastFive));
     }
 }
