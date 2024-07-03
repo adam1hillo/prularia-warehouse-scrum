@@ -7,16 +7,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("leveringen")
 public class InkomendeLeveringController {
     private final InkomendeLeveringService inkomendeLeveringService;
+
     public InkomendeLeveringController(InkomendeLeveringService inkomendeLeveringService) {
         this.inkomendeLeveringService = inkomendeLeveringService;
     }
 
     /*
     @PostMapping
-    //deze method geeft de inkomendeLeveringsId terug van de nieuw aangemaakte levering
+        //deze method geeft de inkomendeLeveringsId terug van de nieuw aangemaakte levering
     long nieuweInkomendeLevering(
             @RequestBody @Valid NieuweInkomendeLevering nieuweInkomendeLevering) {
         return inkomendeLeveringService.nieuweInkomendeLevering(nieuweInkomendeLevering);
+
     }
 
     @PostMapping("{inkomendeLeveringsId}")
@@ -26,7 +28,6 @@ public class InkomendeLeveringController {
         inkomendeLeveringService.nieuweInkomendeLeveringsLijn(inkomendeLeveringsId, nieuweInkomendeLeveringsLijn);
     }
          */
-
 
 
 }

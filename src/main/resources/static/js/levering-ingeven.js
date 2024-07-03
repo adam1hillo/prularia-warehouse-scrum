@@ -2,6 +2,9 @@
 
 import {byId, toon, verberg} from "./util.js";
 
+const leverancierInput = byId("leverancier-select");
+
+
 await getLeveranciers();
 byId("artikelToevoegen").onclick = voegArtikelToe;
 
@@ -48,19 +51,57 @@ async function voegArtikelToe() {
         }
         const artikelenBody = byId("toegevoegdeArtikelenBody");
         const tr = artikelenBody.insertRow();
+        tr.id = artikel.ean;
         const eanCodeTd = document.createElement("td");
         eanCodeTd.innerText = artikel.ean;
         tr.appendChild(eanCodeTd);
+
         const artikelNaamTd = document.createElement("td");
         artikelNaamTd.innerText = artikel.naam;
         tr.appendChild(artikelNaamTd);
+
         const aantalTd = document.createElement("td");
         aantalTd.innerText = byId("aantal").value;
         tr.appendChild(aantalTd);
+
+        // Add inputbox for # goedgekeurd
+        const goedgekeurdTd = document.createElement("td");
+        const goedgekeurdInput = document.createElement('input');
+        goedgekeurdInput.min = 0;
+        goedgekeurdInput.max = Number(aantalTd.innerText);
+        goedgekeurdInput.type = "number";
+        goedgekeurdInput.classList.add("input-smaller");
+
+        goedgekeurdInput.addEventListener('change', (e) => handleChangeGoedgekeurd(e));
+
+        goedgekeurdTd.appendChild(goedgekeurdInput);
+        tr.appendChild(goedgekeurdTd);
+
+        // Add TD for afgekeurd
+        const afgekeurdTd = document.createElement('td');
+        afgekeurdTd.innerText = 0;
+        tr.appendChild(afgekeurdTd);
+
+
         artikelenBody.appendChild(tr);
+
+
     } else if (response.status === 404) {
         toon("verkeerdeEAN");
     } else {
         toon("storing")
     }
+}
+
+function handleChangeGoedgekeurd(e) {
+    updateAfgekeurdValue(e);
+}
+
+function updateAfgekeurdValue(e) {
+    const rowElement = e.target.parentElement.parentNode;
+    const afgekeurdTd = rowElement.lastChild;
+    const goedgekeurdInput = e.target;
+    const aantalArtikelen = Number(rowElement.childNodes.item(2).innerText);
+
+    afgekeurdTd.innerText = aantalArtikelen - Number(goedgekeurdInput.value);
 }
