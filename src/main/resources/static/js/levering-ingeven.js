@@ -4,7 +4,7 @@ import {byId, toon, verberg} from "./util.js";
 
 const tableWrapper = byId("table-wrapper");
 const tableBody = byId("toegevoegdeArtikelenBody");
-const btnNext = byId("btn-next");
+const btnNext = byId("buttonVolgende");
 
 
 await getLeveranciers();
