@@ -69,4 +69,13 @@ public class MagazijnPlaatsRepository {
             throw new MagazijnPlaatsNietGevondenException();
         }
     }
+    public void updateAantalAndId(long magazijnPlaatsId, long artikelId, int aantal){
+        String sql = """ 
+                UPDATE magazijnplaatsen
+                SET aantal = aantal + ?, artikelId = ?
+                WHERE magazijnPlaatsId = ?;""";
+        if (jdbcClient.sql(sql).params(aantal, artikelId, magazijnPlaatsId).update() == 0) {
+            throw new MagazijnPlaatsNietGevondenException();
+        }
+    }
 }
