@@ -2,6 +2,11 @@
 
 import {byId, toon, verberg} from "./util.js";
 
+const tableWrapper = byId("table-wrapper");
+const tableBody = byId("toegevoegdeArtikelenBody");
+const btnNext = byId("btn-next");
+
+
 await getLeveranciers();
 byId("artikelToevoegen").onclick = voegArtikelToe;
 
@@ -113,6 +118,15 @@ function updateAfgekeurdValue(e) {
     afgekeurdTd.innerText = aantalArtikelen - Number(goedgekeurdInput.value);
 }
 
+function hide(element) {
+    element.hidden = true;
+}
+
 function deleteRow(rowElement) {
     rowElement.remove();
+
+    if (tableBody.rows.length === 0) {
+        hide(tableWrapper);
+        hide(btnNext);
+    }
 }
