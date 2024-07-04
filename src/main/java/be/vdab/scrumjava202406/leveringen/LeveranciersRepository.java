@@ -15,7 +15,7 @@ public class LeveranciersRepository {
 
     public List<LeverancierIdNaam> findAll() {
         var sql = """
-                select leveranciersId, naam from leveranciers
+                select leveranciersId, naam from Leveranciers
                 """;
         return jdbcClient.sql(sql)
                 .query(LeverancierIdNaam.class)
