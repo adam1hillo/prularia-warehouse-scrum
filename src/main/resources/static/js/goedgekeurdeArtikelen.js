@@ -6,7 +6,7 @@ const response = await fetch("artikelen/findAllPlaceForDelivery",{
     method: "GET",
     body: JSON.stringify(artikelDataForFetch)
 });
-if(response.ok){
+if (response.ok) {
     const responsebody = await response.json();
     setText("bestelId", responsebody.bestelId);
     tableInvullen(responsebody.artikelLijn);
@@ -17,23 +17,13 @@ if(response.ok){
 
 } else {
     toon("storing");
-} */
+}
 
-// Mockup datas
-const data = [
-    {id: 1, rij: 'A', rek: 10, artikel: 'artikel1', aantal: 5, klaar: true},
-    {id: 2, rij: 'B', rek: 20, artikel: 'artikel2', aantal: 3, klaar: false},
-    {id: 3, rij: 'C', rek: 30, artikel: 'artikel3', aantal: 7, klaar: true},
-    {id: 4, rij: 'D', rek: 40, artikel: 'artikel4', aantal: 1, klaar: true},
-    {id: 5, rij: 'E', rek: 50, artikel: 'artikel5', aantal: 9, klaar: false}
-];
-
-document.addEventListener('DOMContentLoaded', () => {
     const tbody = document.getElementById('goedgekeurdeArtikelenBody');
     const bevestigButton = document.getElementById('bevestig');
 
-    function tableInvullen(data){
-        data.forEach(item =>{
+    function tableInvullen(data) {
+        data.forEach(item => {
             const tr = document.createElement('tr');
             let td = document.createElement('td');
 
@@ -45,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tr.appendChild(td);
 
             td = document.createElement('td');
-            td.textContent = item.artikel;
+            td.textContent = item.artikelNaam;
             tr.appendChild(td);
 
             td = document.createElement('td');
@@ -93,7 +83,7 @@ function getCheckedCheckboxes() {
             selectedCheckedBoxes.push(index + 1)
         }
     });
-    sessionStorage.setItem('checkboxes',JSON.stringify(selectedCheckedBoxes) );
+    sessionStorage.setItem('checkboxes', JSON.stringify(selectedCheckedBoxes));
 }
 
 
