@@ -98,7 +98,7 @@ function setCheckedCheckboxes() {
     });
 }
 
-async function updateArtikelVoorraadPerPlaats(magaziiijnPlaatsPerLijn) {
+async function updateArtikelVoorraadPerPlaats(magazijnPlaatsPerLijn) {
     const url = `/artikelen/updateVoorraad/plaats`;
 
     try {
@@ -107,7 +107,7 @@ async function updateArtikelVoorraadPerPlaats(magaziiijnPlaatsPerLijn) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(magaziiijnPlaatsPerLijn)
+            body: JSON.stringify(magazijnPlaatsPerLijn)
         });
 
         if (!response.ok) {
@@ -163,13 +163,13 @@ async function updateTotaleVoorraad(artikelId, aantal) {
     }
 }
 
-async function afgewerkyButton(responsebody) {
+async function afgewerktButton(responsebody) {
     //change Artikel voorraad
-    //change magazijnPlaats Aaantal
+    //change magazijnPlaats Aantal
     //change Bestelling status
     const bestelId = responsebody.bestelId;
     const artikelLijn = responsebody.artikelLijn;
-    const magaziiijnPlaatsAantalVerrand = artikelLijn.map(item => {
+    const magazijnPlaatsAantalVeranderen = artikelLijn.map(item => {
         return {
             rij: item.rij,
             rek: item.rek,
@@ -192,8 +192,8 @@ async function afgewerkyButton(responsebody) {
         updateTotaleVoorraad(artikelVoorraad.artikelId, artikelVoorraad.totaalAantal)
     );
 
-    // Add promise for magaziiijn plaats update
-    voorraadPromises.push(updateArtikelVoorraadPerPlaats(magaziiijnPlaatsAantalVerrand));
+    // Add promise for magazijn plaats update
+    voorraadPromises.push(updateArtikelVoorraadPerPlaats(magazijnPlaatsAantalVeranderen));
 
     // Wait for all promises to complete
     await Promise.all(voorraadPromises);
@@ -204,7 +204,7 @@ async function afgewerkyButton(responsebody) {
 /*tableInvullen(data);
 setText("bestelId",dataBesteldId);*/
 byId("afgewerkt").addEventListener("click", async () => {
-    await afgewerkyButton(resp).then(() => {
+    await afgewerktButton(resp).then(() => {
             sessionStorage.removeItem('checkboxes');
             window.location.href = "bevestigingspagina.html";
         }
