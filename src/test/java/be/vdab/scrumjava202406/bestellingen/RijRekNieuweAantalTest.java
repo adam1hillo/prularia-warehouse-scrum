@@ -41,7 +41,7 @@ public class RijRekNieuweAantalTest {
         RijRekNieuweAantal invalidObject = new RijRekNieuweAantal('A', 0, 3);
         Set<ConstraintViolation<RijRekNieuweAantal>> violations = validator.validate(invalidObject);
         assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getMessage().contains("must be greater than or equal to 1")));
+        assertTrue(violations.stream().anyMatch(v -> v.getMessage().contains("must be greater than or equal to 1") || v.getMessage().contains("moet groter of gelijk aan 1 zijn")));
     }
 
     @Test
@@ -49,6 +49,6 @@ public class RijRekNieuweAantalTest {
         RijRekNieuweAantal invalidObject = new RijRekNieuweAantal('A', 4, -1);
         Set<ConstraintViolation<RijRekNieuweAantal>> violations = validator.validate(invalidObject);
         assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getMessage().contains("must be greater than 0")));
+        assertTrue(violations.stream().anyMatch(v -> v.getMessage().contains("must be greater than or equal to 1") || v.getMessage().contains("moet groter dan 0 zijn")));
     }
 }
