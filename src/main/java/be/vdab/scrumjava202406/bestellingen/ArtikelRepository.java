@@ -13,7 +13,7 @@ public class ArtikelRepository {
         this.jdbcClient = jdbcClient;
     }
 
-    Optional<Artikel> findById(long id) {
+    public Optional<Artikel> findById(long id) {
         String sql = """
                select artikelId, ean, naam,beschrijving,prijs,gewichtInGram,bestelpeil,voorraad,minimumVoorraad,maximumVoorraad,levertijd,aantalBesteldLeverancier,maxAantalInMagazijnPlaats,leveranciersId
                from Artikelen
@@ -21,6 +21,19 @@ public class ArtikelRepository {
                """;
         return jdbcClient.sql(sql)
                 .param(id)
+                .query(Artikel.class)
+                .optional();
+    }
+
+    Optional<Artikel> findByEanLastFive(String eanLastFive) {
+        var sql = """
+               select artikelId, ean, naam,beschrijving,prijs,gewichtInGram,bestelpeil,voorraad,minimumVoorraad,maximumVoorraad,levertijd,aantalBesteldLeverancier,maxAantalInMagazijnPlaats,leveranciersId
+               from Artikelen
+               where ean like ?
+               """;
+        String like = "%" + eanLastFive;
+        return jdbcClient.sql(sql)
+                .param(like)
                 .query(Artikel.class)
                 .optional();
     }
