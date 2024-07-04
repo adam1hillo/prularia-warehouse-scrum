@@ -206,7 +206,7 @@ setText("bestelId",dataBesteldId);*/
 byId("afgewerkt").addEventListener("click", async () => {
     await afgewerktButton(resp).then(() => {
             sessionStorage.removeItem('checkboxes');
-            window.location.href = "bevestigingspagina.html";
+            window.location.href = "bevestigingspagina-bestellingen.html";
         }
     );
 
