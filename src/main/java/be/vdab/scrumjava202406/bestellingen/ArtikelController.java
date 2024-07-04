@@ -68,7 +68,7 @@ public class ArtikelController {
         return artikelService.updateAantalAlgemeel(id, aantal);
     }*/
 
-    @GetMapping("findAllPlaceForDelivery")
+    @PostMapping("findAllPlaceForDelivery")
     public List<MagazijnPlaats> findAllPlaceForDelivery(@RequestBody List<ArtikelPlaatsRequest> artikelPlaatsRequests){
        return artikelService.findAllPlaceForDelivery(artikelPlaatsRequests);
     }
