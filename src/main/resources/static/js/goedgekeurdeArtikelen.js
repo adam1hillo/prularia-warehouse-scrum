@@ -2,7 +2,10 @@
 import {byId, toon, verberg, setText} from "./util.js";
 
 
-/* const response = await fetch("");
+const response = await fetch("artikelen/findAllPlaceForDelivery",{
+    method: "GET",
+    body: JSON.stringify(artikelDataForFetch)
+});
 if(response.ok){
     const responsebody = await response.json();
     setText("bestelId", responsebody.bestelId);
