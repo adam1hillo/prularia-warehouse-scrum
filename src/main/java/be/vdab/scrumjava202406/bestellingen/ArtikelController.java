@@ -1,9 +1,6 @@
 package be.vdab.scrumjava202406.bestellingen;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -53,5 +50,31 @@ public class ArtikelController {
         return artikelService.findByEanLastFive(eanLastFive)
                 .map(ArtikelNaamEan::new)
                 .orElseThrow(() -> new ArtikelNietGevondenException(eanLastFive));
+    }
+
+    @GetMapping("checkFreeSpace/{id}")
+    MagazijnPlaats checkFreeSpaceCanAddedToPlace(@PathVariable long id){
+        return magazijnPlaatsService.checkFreeSpaceCanAddedToPlace(id)
+                .orElseThrow(MagazijnPlaatsNietGevondenException::new);
+    }
+
+    @PatchMapping("updateAantal")
+    void updateAantal(){
+        magazijnPlaatsService.updateAantal(561, 5);
+    }
+
+   /* @GetMapping("findAvailablePlace/{id}/{aantal}")
+    List<MagazijnPlaats> algemeelUpdate(@PathVariable long id, @PathVariable int aantal){
+        return artikelService.updateAantalAlgemeel(id, aantal);
+    }*/
+
+    @GetMapping("findAllPlaceForDelivery")
+    public List<MagazijnPlaats> findAllPlaceForDelivery(@RequestBody List<ArtikelPlaatsRequest> artikelPlaatsRequests){
+       return artikelService.findAllPlaceForDelivery(artikelPlaatsRequests);
+    }
+
+    @PatchMapping("updateAllPlaceForDelivery")
+    public List<MagazijnPlaats> updateAllPlaceForDelivery(@RequestBody List<MagazijnPlaats> magazijnPlaatsen){
+        return artikelService.updateAllPlaceForDelivery(magazijnPlaatsen);
     }
 }
