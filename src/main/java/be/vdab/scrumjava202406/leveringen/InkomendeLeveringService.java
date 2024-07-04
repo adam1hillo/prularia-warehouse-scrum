@@ -19,6 +19,9 @@ import java.util.Map;
 class InkomendeLeveringService {
     private final InkomendeLeveringRepository inkomendeLeveringRepository;
     private final MagazijnPlaatsRepository magazijnPlaatsRepository;
+    private final InkomendeleveringslijnRepository inkomendeleveringslijnRepository;
+    private final ArtikelRepository artikelRepository;
+
     // InkomendeLeveringLijnenRepository nodig!
     // ArtikelRepository nodig om de max aantal per locatie te zien?
 
