@@ -4,17 +4,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("artikelen")
 public class ArtikelController {
     private final ArtikelService artikelService;
     private static MagazijnPlaatsService magazijnPlaatsService = null;
+    private final ArtikelRepository artikelRepository;
 
-    public ArtikelController(ArtikelService artikelService,MagazijnPlaatsService magazijnPlaatsService) {
+    public ArtikelController(ArtikelService artikelService, MagazijnPlaatsService magazijnPlaatsService, ArtikelRepository artikelRepository) {
         this.artikelService = artikelService;
         this.magazijnPlaatsService = magazijnPlaatsService;
+        this.artikelRepository = artikelRepository;
     }
 
     private record ArtikelMetPlaatsenDTO(long artikelId, String naam, BigDecimal prijs, long gewichtInGram, int voorraad, int maximumVoorraad, int maxAantalInMagazijnPlaats, List<MagazijnPlaats> magazijnPlaatsen) {
@@ -22,6 +23,12 @@ public class ArtikelController {
             this(artikel.getArtikelId(), artikel.getNaam(), artikel.getPrijs(), artikel.getGewichtInGram(),
                     artikel.getVoorraad(), artikel.getMaximumVoorraad(), artikel.getMaxAantalInMagazijnPlaats(),  magazijnPlaatsService.findAllPlaatsById(artikel.getArtikelId())
                     );
+        }
+    }
+
+    private record ArtikelNaamEan(String naam, long artikelId, String ean) {
+        ArtikelNaamEan(Artikel artikel) {
+            this(artikel.getNaam(), artikel.getArtikelId(), artikel.getEan());
         }
     }
 
@@ -36,6 +43,13 @@ public class ArtikelController {
         return artikelService.findById(id)
                 .map(ArtikelMetPlaatsenDTO::new)
                 .orElseThrow(() -> new ArtikelNietGevondenException(id));
+    }
+
+    @GetMapping("metEanLastFive/{eanLastFive}")
+    ArtikelNaamEan findArtikelNaamByEanLastFive(@PathVariable String eanLastFive) {
+        return artikelService.findByEanLastFive(eanLastFive)
+                .map(ArtikelNaamEan::new)
+                .orElseThrow(() -> new ArtikelNietGevondenException(eanLastFive));
     }
 
     @GetMapping("checkFreeSpace/{id}")
