@@ -5,5 +5,5 @@ import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDate;
 
-record NieuweInkomendeLevering(@Positive long leveranciersId, @NotBlank String leveringsbonNummer, @NotBlank LocalDate leveringsbondatum) {
+record NieuweInkomendeLevering(@Positive long leveranciersId, @NotBlank String leveringsbonNummer, @NotBlank String  leveringsbondatum, @NotBlank String leverDatum) {
 }

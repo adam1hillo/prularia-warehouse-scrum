@@ -12,15 +12,16 @@ public class InkomendeLeveringController {
         this.inkomendeLeveringService = inkomendeLeveringService;
     }
 
-    /*
-    @PostMapping
+
+    @PostMapping("create")
         //deze method geeft de inkomendeLeveringsId terug van de nieuw aangemaakte levering
     long nieuweInkomendeLevering(
             @RequestBody @Valid NieuweInkomendeLevering nieuweInkomendeLevering) {
+        System.out.println("in cintroller");
         return inkomendeLeveringService.nieuweInkomendeLevering(nieuweInkomendeLevering);
 
     }
-
+ /*
     @PostMapping("{inkomendeLeveringsId}")
     void nieuweInkomendeLeveringsLijn(
             @PathVariable long inkomendeLeveringsId,

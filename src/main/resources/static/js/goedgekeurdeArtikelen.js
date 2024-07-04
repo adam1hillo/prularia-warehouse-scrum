@@ -2,19 +2,47 @@
 import {byId, toon, verberg, setText} from "./util.js";
 
 
-const response = await fetch("artikelen/findAllPlaceForDelivery",{
-    method: "GET",
+const artikelenDataFromStorage = JSON.parse(localStorage.getItem("artikelen"));
+const leveringsBonDataFromStorage = JSON.parse(localStorage.getItem("leveringsbonData"));
+
+console.log(artikelenDataFromStorage);
+console.log(leveringsBonDataFromStorage);
+
+let artikelDataForFetch = [];
+artikelenDataFromStorage.map(artikel => {
+    artikelDataForFetch.push({
+        "artikelId": Number(artikel.id),
+        "aantal": artikel.goedgekeurd
+    })
+})
+
+console.log(artikelDataForFetch);
+
+function findNaamById(id) {
+    const product = artikelenDataFromStorage.find(product => product.id === id);
+    return product ? product.naam : null;
+}
+
+let artikelDataForHtml = [];
+
+const response = await fetch("artikelen/findAllPlaceForDelivery", {
+    method: "POST",
+    headers: {'Content-type': 'application/json'},
     body: JSON.stringify(artikelDataForFetch)
 });
 if (response.ok) {
     const responsebody = await response.json();
-    setText("bestelId", responsebody.bestelId);
-    tableInvullen(responsebody.artikelLijn);
-    setCheckedCheckboxes()
-    const checkedList = document.getElementsByClassName("checked");
-    byId("bevestig").disabled = JSON.parse(sessionStorage.getItem("checkboxes")).length !== responsebody.artikelLijn.length;
-
-
+    console.log(responsebody)
+    responsebody.map(item => {
+        artikelDataForHtml.push({
+            "magazijnPlaatsId": item.magazijnPlaatsId,
+            "artikelId": item.artikelId,
+            "rij": item.rij,
+            "rek": item.rek,
+            "aantal": item.aantal,
+            "artikelNaam": findNaamById(item.artikelId.toString())
+        })
+    })
 } else {
     toon("storing");
 }
@@ -65,14 +93,44 @@ if (response.ok) {
         });
     }
 
-    tableInvullen(data);
+    tableInvullen(artikelDataForHtml);
 
     bevestigButton.disabled = true;
 
-    bevestigButton.addEventListener('click', () => {
-        window.location.href = "bevestiging.html";
+    bevestigButton.addEventListener('click', async () => {
+
+        const data = {
+            "leveranciersId": Number(leveringsBonDataFromStorage.leveranciersId),
+            "leveringsbonNummer": leveringsBonDataFromStorage.leveringsbonNummer,
+            "leveringsbondatum" : "12/6/2022" ,
+            "leverDatum":"12/6/2022"
+        }
+
+        const data2 = {
+            "leveranciersId": 1,
+            "leveringsbonNummer": "1234-2345",
+            "leveringsbondatum": "12/06/2022",
+            "leverDatum": "12/06/2022"
+        }
+        console.log(data);
+        const response = await fetch("leveringen/create", {
+            method: "POST",
+            headers: {
+                            "Content-type": "application/json"
+                        },
+            body: JSON.stringify(data)
+        });
+        console.log(response);
+        if (response.ok) {
+            const responsebody = await response.json();
+            console.log(responsebody)
+
+        } else {
+            toon("storing");
+        }
+
+       // window.location.href = "bevestiging.html";
     });
-});
 
 function getCheckedCheckboxes() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');

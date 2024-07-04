@@ -8,7 +8,7 @@ class InkomendeLevering {
     private final String leveringsbonNummer;
     private final LocalDate leveringsbondatum;
     private final LocalDate leverDatum;
-    static final long ontvangerPersoneelslidId = 4;
+    static final long ontvangerPersoneelslidId = 4L;
 
     InkomendeLevering(long inkomendeLeveringsId, long leveranciersId, String leveringsbonNummer, LocalDate leveringsbondatum, LocalDate leverDatum) {
         this.inkomendeLeveringsId = inkomendeLeveringsId;
