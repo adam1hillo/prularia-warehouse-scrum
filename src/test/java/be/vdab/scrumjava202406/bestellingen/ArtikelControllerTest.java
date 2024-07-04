@@ -22,8 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Transactional
 //@Sql("/artikelen2.sql")
-@Sql("/Artikelen.sql")
-@Sql("/MagazijnPlaatsen.sql")
+@Sql("/artikelen3.sql")
+@Sql("/magazijnPlaatsen2.sql")
 @AutoConfigureMockMvc
 class ArtikelControllerTest {
 

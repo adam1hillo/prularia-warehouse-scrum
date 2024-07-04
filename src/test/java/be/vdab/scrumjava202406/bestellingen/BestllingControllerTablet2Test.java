@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @SpringBootTest
 @Transactional
-@Sql("/Bestellingen.sql")
+@Sql("/bestellingen2.sql")
 @AutoConfigureMockMvc
 public class BestllingControllerTablet2Test {
     private final static String BESTELLINGEN_TABLE = "Bestellingen";
