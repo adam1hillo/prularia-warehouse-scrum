@@ -1,5 +1,8 @@
 package be.vdab.scrumjava202406.bestellingen;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +11,8 @@ import java.util.Optional;
 
 @Repository
 public class MagazijnPlaatsRepository {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
     private final JdbcClient jdbcClient;
 
     public MagazijnPlaatsRepository(JdbcClient jdbcClient) {
@@ -25,6 +30,17 @@ public class MagazijnPlaatsRepository {
                 .param(id)
                 .query(MagazijnPlaats.class)
                 .list();
+    }
+
+    public MagazijnPlaats findById(long id) {
+        String sql = """ 
+                SELECT magazijnPlaatsId, artikelId, rij, rek, aantal
+                FROM magazijnplaatsen
+                WHERE magazijnPlaatsId = ? ;""";
+        return jdbcClient.sql(sql)
+                .param(id)
+                .query(MagazijnPlaats.class)
+                .single();
     }
 
     public long findFirstFreePlaceId(){
@@ -69,13 +85,15 @@ public class MagazijnPlaatsRepository {
             throw new MagazijnPlaatsNietGevondenException();
         }
     }
-    public void updateAantalAndId(long magazijnPlaatsId, long artikelId, int aantal){
+    public MagazijnPlaats updateAantalAndId(long magazijnPlaatsId, long artikelId, int aantal){
         String sql = """ 
                 UPDATE magazijnplaatsen
                 SET aantal = aantal + ?, artikelId = ?
                 WHERE magazijnPlaatsId = ?;""";
+        System.out.println(sql);
         if (jdbcClient.sql(sql).params(aantal, artikelId, magazijnPlaatsId).update() == 0) {
             throw new MagazijnPlaatsNietGevondenException();
         }
+        return findById(magazijnPlaatsId);
     }
 }

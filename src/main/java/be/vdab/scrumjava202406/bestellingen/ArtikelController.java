@@ -58,4 +58,9 @@ public class ArtikelController {
     public List<MagazijnPlaats> findAllPlaceForDelivery(@RequestBody List<ArtikelPlaatsRequest> artikelPlaatsRequests){
        return artikelService.findAllPlaceForDelivery(artikelPlaatsRequests);
     }
+
+    @PatchMapping("updateAllPlaceForDelivery")
+    public List<MagazijnPlaats> updateAllPlaceForDelivery(@RequestBody List<MagazijnPlaats> magazijnPlaatsen){
+        return artikelService.updateAllPlaceForDelivery(magazijnPlaatsen);
+    }
 }

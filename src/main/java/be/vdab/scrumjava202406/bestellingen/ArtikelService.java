@@ -40,8 +40,8 @@ public class ArtikelService {
     }
 
     @Transactional
-    public void updateAantalAndId(long magazijnPlaatsId, long artikelId, int aantal){
-        magazijnPlaatsRepository.updateAantalAndId(magazijnPlaatsId, artikelId, aantal);
+    public MagazijnPlaats updateAantalAndId(long magazijnPlaatsId, long artikelId, int aantal){
+        return magazijnPlaatsRepository.updateAantalAndId(magazijnPlaatsId, artikelId, aantal);
     }
 
 
@@ -169,5 +169,14 @@ public class ArtikelService {
         System.out.println(listVanMagazijnPlaatsen);
         return listVanMagazijnPlaatsen;
 
+    }
+
+    @Transactional
+    public List<MagazijnPlaats> updateAllPlaceForDelivery(List<MagazijnPlaats> magazijnPlaatsen){
+        List<MagazijnPlaats> listVanMagazijnPlaatsen = new ArrayList<>();
+        for (MagazijnPlaats magazijnPlaats : magazijnPlaatsen) {
+            listVanMagazijnPlaatsen.add(updateAantalAndId(magazijnPlaats.getMagazijnPlaatsId(),magazijnPlaats.getArtikelId(),magazijnPlaats.getAantal()));
+        }
+        return listVanMagazijnPlaatsen;
     }
 }

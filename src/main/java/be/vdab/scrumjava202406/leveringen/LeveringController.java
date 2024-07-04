@@ -1,8 +1,6 @@
 package be.vdab.scrumjava202406.leveringen;
 
-import be.vdab.scrumjava202406.bestellingen.MagazijnPlaats;
-import be.vdab.scrumjava202406.bestellingen.MagazijnPlaatsNietGevondenException;
-import be.vdab.scrumjava202406.bestellingen.MagazijnPlaatsService;
+import be.vdab.scrumjava202406.bestellingen.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
