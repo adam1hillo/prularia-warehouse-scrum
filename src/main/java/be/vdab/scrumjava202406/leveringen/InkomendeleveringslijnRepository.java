@@ -13,14 +13,28 @@ InkomendeleveringslijnRepository (JdbcClient jdbcClient) {
 public void create(Inkomendeleveringslijn inkomendeleveringslijn) {
     var sql = """
             insert into inkomendeleveringslijnen (inkomendeLeveringsId, artikelId, aantalGoedgekeurd, aantalTeruggestuurd, magazijnPlaatsId)
-            values (?, ?, ?, ?, 0);
+            values (?, ?, ?, ?, ?);
             """;
     jdbcClient.sql(sql)
             .params(inkomendeleveringslijn.getInkomendeLeveringsId(),
                     inkomendeleveringslijn.getArtikelId(),
                     inkomendeleveringslijn.getAantalGoedgekeurd(),
-                    inkomendeleveringslijn.getAantalTeruggestuurd())
+                    inkomendeleveringslijn.getAantalTeruggestuurd(),
+                    inkomendeleveringslijn.getMagazijnPlaatsId())
             .update();
 }
+
+    public void update(Inkomendeleveringslijn inkomendeleveringslijn) {
+        var sql = """
+            update inkomendeleveringslijnen
+            set aantalTeruggestuurd = ?
+            where magazijnPlaatsId = ?;
+            
+            """;
+        jdbcClient.sql(sql)
+                .params(inkomendeleveringslijn.getAantalTeruggestuurd(),
+                        inkomendeleveringslijn.getMagazijnPlaatsId())
+                .update();
+    }
 
 }

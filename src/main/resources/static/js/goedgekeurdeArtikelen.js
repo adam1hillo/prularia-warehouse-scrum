@@ -9,10 +9,16 @@ console.log(artikelenDataFromStorage);
 console.log(leveringsBonDataFromStorage);
 
 let artikelDataForFetch = [];
+let artikelEnAfgekeurdData = [];
 artikelenDataFromStorage.map(artikel => {
     artikelDataForFetch.push({
         "artikelId": Number(artikel.id),
         "aantal": artikel.goedgekeurd
+    })
+    artikelEnAfgekeurdData.push({
+        "artikelId": Number(artikel.id),
+        "afgekeurd": Number(artikel.afgekeurd),
+        "goedgekeurd": artikel.goedgekeurd
     })
 })
 
@@ -107,11 +113,11 @@ if (response.ok) {
             "leveringsbonNummer": leveringsBonDataFromStorage.leveringsbonNummer,
             "leveringsbondatum" : leveringsBonDataFromStorage.leveringsbonDatum ,
             "leverDatum":leveringsBonDataFromStorage.leverdatum,
-            "afgekeurd": Number(artikelenDataFromStorage[0].afgekeurd),
+            "artikelIdEnAfgekeurdList": artikelEnAfgekeurdData,
             "magazijnPlaatsList":magazijnPlaceForAllArtikel
         }
 
-        console.log(data);
+        // console.log(data);
 
         const response = await fetch("leveringen/create", {
             method: "POST",
@@ -122,9 +128,10 @@ if (response.ok) {
         });
         console.log(response);
         if (response.ok) {
-            const inkomendeLeveringsId = await response.json();
-            console.log(inkomendeLeveringsId);
-            console.log(magazijnPlaceForAllArtikel);
+            window.location.href = "bevestigingspaginaLevering.html";
+             //const inkomendeLeveringsId = await response.json();
+            // console.log(inkomendeLeveringsId);
+            // console.log(magazijnPlaceForAllArtikel);
 
             /*const responseForPlaceUpdate = await fetch("artikelen/updateAllPlaceForDelivery", {
                 method: "PATCH",

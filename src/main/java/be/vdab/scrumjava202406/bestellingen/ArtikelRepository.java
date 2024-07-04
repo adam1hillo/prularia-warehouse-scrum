@@ -37,4 +37,13 @@ public class ArtikelRepository {
                 .query(Artikel.class)
                 .optional();
     }
+    public void updateVoorraad(long artikelId, int voorraad) {
+        String sql = """ 
+                UPDATE Artikelen
+                SET voorraad = voorraad + ?
+                WHERE artikelId = ?;""";
+        if (jdbcClient.sql(sql).params(voorraad, artikelId).update() == 0) {
+            throw new ArtikelNietGevondenException(artikelId);
+        }
+    }
 }

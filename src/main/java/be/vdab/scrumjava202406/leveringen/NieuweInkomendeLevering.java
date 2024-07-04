@@ -11,7 +11,7 @@ record NieuweInkomendeLevering(@Positive long leveranciersId,
                                @NotBlank String leveringsbonNummer,
                                @NotBlank String  leveringsbondatum,
                                @NotBlank String leverDatum,
-                               int afgekeurd,
+                               List<ArtikelIdEnAfgekeurd> artikelIdEnAfgekeurdList,
                                List<MagazijnPlaats> magazijnPlaatsList
                                ) {
 }
