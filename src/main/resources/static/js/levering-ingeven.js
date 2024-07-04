@@ -4,7 +4,67 @@ import {byId, toon, verberg} from "./util.js";
 
 const tableWrapper = byId("table-wrapper");
 const tableBody = byId("toegevoegdeArtikelenBody");
-const btnNext = byId("buttonVolgende");
+const btnNextWrapper = byId("buttonVolgende");
+const btnNext = byId("btn-next");
+const leverancierSelect = byId("leverancier-select");
+const leveringsbonnummerInput = byId("leveringsbonnummer-input");
+const leveringsbondatumInput = byId("leveringsbondatum-input");
+const leverdatumInput = byId("leverdatum-input");
+
+const leveringsbonData = {
+    // leveranciersId,
+    // leveringsbonNummer,
+    // leveringsbonDatum,
+    // leverdatum
+};
+
+const artikelen = [
+    // {
+    //     ean,
+    //     artikelId,
+    //     artikelNaam,
+    //     aantal,
+    //     aantalGoedgekeurd,
+    //     aantalAfgekeurd
+    // }
+];
+
+localStorage.clear();
+
+btnNext.addEventListener('click', (e) => {
+    saveLeveringsbonData();
+    saveArticlesData();
+    window.location.href = 'goedgekeurdeArtikelen.html';
+});
+
+function saveArticlesData() {
+    const rows = document.querySelectorAll('.artikel');
+
+    rows.forEach(row => {
+        const artikel = {
+            id: row.id,
+            ean: row.childNodes[0].textContent,
+            naam: row.childNodes[1].textContent,
+            aantal: row.childNodes[2].textContent,
+            goedgekeurd: Number(byId(row.childNodes[0].textContent).value),
+            afgekeurd: row.childNodes[4].textContent
+        }
+
+        artikelen.push(artikel);
+    });
+
+    localStorage.setItem('artikelen', JSON.stringify(artikelen));
+}
+
+
+function saveLeveringsbonData() {
+    leveringsbonData.leveranciersId = leverancierSelect.value;
+    leveringsbonData.leveringsbonNummer = leveringsbonnummerInput.value;
+    leveringsbonData.leveringsbonDatum = new Date(leveringsbondatumInput.value).toLocaleDateString("nl-BE");
+    leveringsbonData.leverdatum = new Date(leverdatumInput.value).toLocaleDateString("nl-BE");
+
+    localStorage.setItem('leveringsbonData', JSON.stringify(leveringsbonData));
+}
 
 
 await getLeveranciers();
@@ -53,7 +113,8 @@ async function voegArtikelToe() {
         }
         const artikelenBody = byId("toegevoegdeArtikelenBody");
         const tr = artikelenBody.insertRow();
-        tr.id = artikel.ean;
+        tr.id = artikel.artikelId;
+        tr.classList.add("artikel");
         tr.addEventListener('click', (e) => handleClickRow(e));
         const eanCodeTd = document.createElement("td");
         eanCodeTd.innerText = artikel.ean;
@@ -64,7 +125,8 @@ async function voegArtikelToe() {
         tr.appendChild(artikelNaamTd);
 
         const aantalTd = document.createElement("td");
-        aantalTd.innerText = byId("aantal").value;
+        const aantalArtikelen = byId("aantal").value
+        aantalTd.innerText = aantalArtikelen;
         tr.appendChild(aantalTd);
 
         // Add inputbox for # goedgekeurd
@@ -75,6 +137,7 @@ async function voegArtikelToe() {
         goedgekeurdInput.type = "number";
         goedgekeurdInput.placeholder = 0;
         goedgekeurdInput.classList.add("input-smaller");
+        goedgekeurdInput.id = artikel.ean;
 
         goedgekeurdInput.addEventListener('input', (e) => handleChangeGoedgekeurd(e));
 
@@ -88,7 +151,6 @@ async function voegArtikelToe() {
 
 
         artikelenBody.appendChild(tr);
-
 
     } else if (response.status === 404) {
         toon("verkeerdeEAN");
@@ -138,6 +200,6 @@ function deleteRow(rowElement) {
 
     if (tableBody.rows.length === 0) {
         hide(tableWrapper);
-        hide(btnNext);
+        hide(btnNextWrapper);
     }
 }
