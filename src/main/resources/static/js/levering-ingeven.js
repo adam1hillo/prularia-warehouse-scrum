@@ -98,11 +98,22 @@ async function voegArtikelToe() {
 }
 
 function handleChangeGoedgekeurd(e) {
+    const goedgekeurdInput = e.target;
+    if (goedgekeurdInput.value !== "") {
+        if (Number(goedgekeurdInput.value) < Number(goedgekeurdInput.min)) {
+            goedgekeurdInput.value = goedgekeurdInput.min;
+        }
+        if (Number(goedgekeurdInput.value) > Number(goedgekeurdInput.max)) {
+            goedgekeurdInput.value = goedgekeurdInput.max;
+        }
+    }
+
     updateAfgekeurdValue(e);
 }
 
 function handleClickRow(e) {
     const selectedRow = e.target.parentElement;
+
 
     if (e.ctrlKey) {
         deleteRow(selectedRow);
