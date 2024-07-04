@@ -34,7 +34,7 @@ public class BestllingControllerTablet2Test {
     @Test
     void updateBestellingStatusToOnderweg_success() throws Exception {
         var bestelId = idVanTest1BestelId();
-        mockMvc.perform(patch("/artikelen/updateStatusOnderweg/{id}",bestelId))
+        mockMvc.perform(patch("/bestellingen/updateStatusOnderweg/{id}",bestelId))
                 .andExpect(status().isOk());
         assertThat(JdbcTestUtils.countRowsInTableWhere(jdbcClient, BESTELLINGEN_TABLE,
                 "bestellingsStatusId = 5 and bestelId =" + bestelId)).isOne();
@@ -42,7 +42,7 @@ public class BestllingControllerTablet2Test {
 
     @Test
     void updateBestellingStatusToOnderweg_notFound() throws Exception {
-        mockMvc.perform(patch("/artikelen/updateStatusOnderweg/{id}",Integer.MAX_VALUE))
+        mockMvc.perform(patch("/bestellingen/updateStatusOnderweg/{id}",Integer.MAX_VALUE))
                 .andExpect(status().isNotFound());
     }
 
