@@ -74,10 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tableInvullen(data);
 
-    bevestigButton.disabled = false;
+    bevestigButton.disabled = true;
 
     bevestigButton.addEventListener('click', () => {
-        alert('Artikelen zijn succesvol weggeplaatst!');
+        window.location.href = "bevestiging.html";
     });
 });
 
