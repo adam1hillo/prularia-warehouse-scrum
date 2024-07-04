@@ -223,7 +223,7 @@ if (response.ok) {
 
 
 } else {
-    toon("storing");
+    toon("nietGevonden");
 }
 
 

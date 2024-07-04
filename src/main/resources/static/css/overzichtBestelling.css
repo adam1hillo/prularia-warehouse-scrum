@@ -87,3 +87,13 @@ body {
     color: #666;
     cursor: not-allowed;
 }
+
+.fout {
+    background-color: red;
+    color:white;
+    font-weight: bold;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    text-align: center;
+}
+
