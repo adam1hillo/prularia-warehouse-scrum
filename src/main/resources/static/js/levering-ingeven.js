@@ -60,8 +60,8 @@ function saveArticlesData() {
 function saveLeveringsbonData() {
     leveringsbonData.leveranciersId = leverancierSelect.value;
     leveringsbonData.leveringsbonNummer = leveringsbonnummerInput.value;
-    leveringsbonData.leveringsbonDatum = new Date(leveringsbondatumInput.value).toLocaleDateString("nl-BE");
-    leveringsbonData.leverdatum = new Date(leverdatumInput.value).toLocaleDateString("nl-BE");
+    leveringsbonData.leveringsbonDatum = new Date(leveringsbondatumInput.value);
+    leveringsbonData.leverdatum = new Date(leverdatumInput.value);
 
     localStorage.setItem('leveringsbonData', JSON.stringify(leveringsbonData));
 }

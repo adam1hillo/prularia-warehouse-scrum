@@ -24,6 +24,7 @@ function findNaamById(id) {
 }
 
 let artikelDataForHtml = [];
+let magazijnPlaceForAllArtikel ;
 
 const response = await fetch("artikelen/findAllPlaceForDelivery", {
     method: "POST",
@@ -33,6 +34,7 @@ const response = await fetch("artikelen/findAllPlaceForDelivery", {
 if (response.ok) {
     const responsebody = await response.json();
     console.log(responsebody)
+    magazijnPlaceForAllArtikel = responsebody;
     responsebody.map(item => {
         artikelDataForHtml.push({
             "magazijnPlaatsId": item.magazijnPlaatsId,
@@ -97,22 +99,20 @@ if (response.ok) {
 
     bevestigButton.disabled = true;
 
+
     bevestigButton.addEventListener('click', async () => {
 
         const data = {
             "leveranciersId": Number(leveringsBonDataFromStorage.leveranciersId),
             "leveringsbonNummer": leveringsBonDataFromStorage.leveringsbonNummer,
-            "leveringsbondatum" : "12/6/2022" ,
-            "leverDatum":"12/6/2022"
+            "leveringsbondatum" : leveringsBonDataFromStorage.leveringsbonDatum ,
+            "leverDatum":leveringsBonDataFromStorage.leverdatum,
+            "afgekeurd": Number(artikelenDataFromStorage[0].afgekeurd),
+            "magazijnPlaatsList":magazijnPlaceForAllArtikel
         }
 
-        const data2 = {
-            "leveranciersId": 1,
-            "leveringsbonNummer": "1234-2345",
-            "leveringsbondatum": "12/06/2022",
-            "leverDatum": "12/06/2022"
-        }
         console.log(data);
+
         const response = await fetch("leveringen/create", {
             method: "POST",
             headers: {
@@ -122,8 +122,24 @@ if (response.ok) {
         });
         console.log(response);
         if (response.ok) {
-            const responsebody = await response.json();
-            console.log(responsebody)
+            const inkomendeLeveringsId = await response.json();
+            console.log(inkomendeLeveringsId);
+            console.log(magazijnPlaceForAllArtikel);
+
+            /*const responseForPlaceUpdate = await fetch("artikelen/updateAllPlaceForDelivery", {
+                method: "PATCH",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(magazijnPlaceForAllArtikel)
+            });
+
+            if (responseForPlaceUpdate.ok) {
+                const listForUpdatedMagazijnPlaces = await responseForPlaceUpdate.json();
+                console.log(listForUpdatedMagazijnPlaces);
+            } else {
+                toon("storing");
+            }*/
 
         } else {
             toon("storing");

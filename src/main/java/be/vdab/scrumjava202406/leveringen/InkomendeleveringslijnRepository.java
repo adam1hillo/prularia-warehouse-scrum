@@ -12,7 +12,8 @@ InkomendeleveringslijnRepository (JdbcClient jdbcClient) {
 
 public void create(Inkomendeleveringslijn inkomendeleveringslijn) {
     var sql = """
-            insert into inkomendeleveringslijnen (inkomendeLeveringsId, artikelId, aantalGoedgekeurd, aantalTeruggestuurd, magazijnPlaatsId) values (?, ?, ?, ?, 0);
+            insert into inkomendeleveringslijnen (inkomendeLeveringsId, artikelId, aantalGoedgekeurd, aantalTeruggestuurd, magazijnPlaatsId)
+            values (?, ?, ?, ?, 0);
             """;
     jdbcClient.sql(sql)
             .params(inkomendeleveringslijn.getInkomendeLeveringsId(),
