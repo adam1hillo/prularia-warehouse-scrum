@@ -166,7 +166,7 @@ public class ArtikelService {
         for (ArtikelPlaatsRequest artikelPlaatsRequest : artikelPlaatsRequests) {
             listVanMagazijnPlaatsen.addAll(getAvailablePlacePerArtikelId(artikelPlaatsRequest.getArtikelId(), artikelPlaatsRequest.getAantal(), magazijnIdDataHolder));
         }
-        System.out.println(listVanMagazijnPlaatsen);
+        // System.out.println(listVanMagazijnPlaatsen);
         return listVanMagazijnPlaatsen;
 
     }
