@@ -67,7 +67,7 @@ public class ArtikelService {
                                 artikelId,
                                 magazijnPlaats.getRij(),
                                 magazijnPlaats.getRek(),
-                                magazijnPlaats.getAantal() + aantal
+                                aantal
                         );
                         listVanMagazijnPlaatsen.add(newMagazijnPlaats);
                     }else{
@@ -77,7 +77,7 @@ public class ArtikelService {
                                 artikelId,
                                 magazijnPlaats.getRij(),
                                 magazijnPlaats.getRek(),
-                                artikel.getMaxAantalInMagazijnPlaats()
+                                artikel.getMaxAantalInMagazijnPlaats() - magazijnPlaats.getAantal()
                         );
                         listVanMagazijnPlaatsen.add(newMagazijnPlaats);
                         int remainingTotaal = aantal - (artikel.getMaxAantalInMagazijnPlaats()-magazijnPlaats.getAantal());
