@@ -9,7 +9,7 @@ const messageTitle = document.querySelector("#message-title");
 /////////////////////
 // Function Calls //
 ///////////////////
-setMessage("De bestelling is volledig afgewerkt.");
+setMessage("De levering is volledig afgewerkt.");
 
 
 ////////////////
