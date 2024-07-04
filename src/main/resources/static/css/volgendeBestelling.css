@@ -56,3 +56,12 @@ body{
 .mr-4{
     margin-right: 4rem;
 }
+.toIndex {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+.toIndex a {
+    color: black;
+    font-weight: bold;
+}

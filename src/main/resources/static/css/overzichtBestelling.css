@@ -45,6 +45,15 @@ body {
     border-top: 1px solid black;
 
 }
+.toIndex {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+.toIndex a {
+    color: black;
+    font-weight: bold;
+}
 
 #bestelling-overzicht table th, table td {
     border: none;
