@@ -18,11 +18,13 @@ public class ArtikelController {
         this.artikelRepository = artikelRepository;
     }
 
-    private record ArtikelMetPlaatsenDTO(long artikelId, String naam, BigDecimal prijs, long gewichtInGram, int voorraad, int maximumVoorraad, int maxAantalInMagazijnPlaats, List<MagazijnPlaats> magazijnPlaatsen) {
-        ArtikelMetPlaatsenDTO(Artikel artikel){
+    private record ArtikelMetPlaatsenDTO(long artikelId, String naam, BigDecimal prijs, long gewichtInGram,
+                                         int voorraad, int maximumVoorraad, int maxAantalInMagazijnPlaats,
+                                         List<MagazijnPlaats> magazijnPlaatsen) {
+        ArtikelMetPlaatsenDTO(Artikel artikel) {
             this(artikel.getArtikelId(), artikel.getNaam(), artikel.getPrijs(), artikel.getGewichtInGram(),
-                    artikel.getVoorraad(), artikel.getMaximumVoorraad(), artikel.getMaxAantalInMagazijnPlaats(),  magazijnPlaatsService.findAllPlaatsById(artikel.getArtikelId())
-                    );
+                    artikel.getVoorraad(), artikel.getMaximumVoorraad(), artikel.getMaxAantalInMagazijnPlaats(), magazijnPlaatsService.findAllPlaatsById(artikel.getArtikelId())
+            );
         }
     }
 
@@ -69,8 +71,8 @@ public class ArtikelController {
     }*/
 
     @PostMapping("findAllPlaceForDelivery")
-    public List<MagazijnPlaats> findAllPlaceForDelivery(@RequestBody List<ArtikelPlaatsRequest> artikelPlaatsRequests){
-       return artikelService.findAllPlaceForDelivery(artikelPlaatsRequests);
+    public List<MagazijnPlaats> findAllPlaceForDelivery(@RequestBody List<ArtikelPlaatsRequest> artikelPlaatsRequests) {
+        return artikelService.findAllPlaceForDelivery(artikelPlaatsRequests);
     }
 
     /*@PatchMapping("updateAllPlaceForDelivery")

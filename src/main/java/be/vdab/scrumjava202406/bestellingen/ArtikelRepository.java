@@ -15,10 +15,10 @@ public class ArtikelRepository {
 
     public Optional<Artikel> findById(long id) {
         String sql = """
-               select artikelId, ean, naam,beschrijving,prijs,gewichtInGram,bestelpeil,voorraad,minimumVoorraad,maximumVoorraad,levertijd,aantalBesteldLeverancier,maxAantalInMagazijnPlaats,leveranciersId
-               from Artikelen
-               where artikelId=?
-               """;
+                select artikelId, ean, naam,beschrijving,prijs,gewichtInGram,bestelpeil,voorraad,minimumVoorraad,maximumVoorraad,levertijd,aantalBesteldLeverancier,maxAantalInMagazijnPlaats,leveranciersId
+                from Artikelen
+                where artikelId=?
+                """;
         return jdbcClient.sql(sql)
                 .param(id)
                 .query(Artikel.class)
@@ -27,10 +27,10 @@ public class ArtikelRepository {
 
     Optional<Artikel> findByEanLastFive(String eanLastFive) {
         var sql = """
-               select artikelId, ean, naam,beschrijving,prijs,gewichtInGram,bestelpeil,voorraad,minimumVoorraad,maximumVoorraad,levertijd,aantalBesteldLeverancier,maxAantalInMagazijnPlaats,leveranciersId
-               from Artikelen
-               where ean like ?
-               """;
+                select artikelId, ean, naam,beschrijving,prijs,gewichtInGram,bestelpeil,voorraad,minimumVoorraad,maximumVoorraad,levertijd,aantalBesteldLeverancier,maxAantalInMagazijnPlaats,leveranciersId
+                from Artikelen
+                where ean like ?
+                """;
         String like = "%" + eanLastFive;
         return jdbcClient.sql(sql)
                 .param(like)

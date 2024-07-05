@@ -15,7 +15,6 @@ import java.util.Map;
 
 @Service
 @Transactional(readOnly = true)
-
 class InkomendeLeveringService {
     private final InkomendeLeveringRepository inkomendeLeveringRepository;
     private final MagazijnPlaatsRepository magazijnPlaatsRepository;
@@ -34,7 +33,8 @@ class InkomendeLeveringService {
         this.inkomendeleveringslijnRepository = inkomendeleveringslijnRepository;
         this.artikelRepository = artikelRepository;
     }
-    long leveringInvoeren(){
+
+    long leveringInvoeren() {
         return 3L;
     }
 
@@ -59,8 +59,8 @@ class InkomendeLeveringService {
         InkomendeLevering inkomendeLevering = new InkomendeLevering(0L,
                 nieuweInkomendeLevering.leveranciersId(),
                 nieuweInkomendeLevering.leveringsbonNummer(),
-                LocalDate.parse(formattedDate,formatter) ,
-                LocalDate.parse(formattedDate1,formatter));
+                LocalDate.parse(formattedDate, formatter),
+                LocalDate.parse(formattedDate1, formatter));
 
         long inkomendeLeveringId = inkomendeLeveringRepository.create(inkomendeLevering);
 
@@ -77,14 +77,14 @@ class InkomendeLeveringService {
 
         // updatePlaces and create inkomendeleveringslijnen
         for (MagazijnPlaats magazijnPlaats : nieuweInkomendeLevering.magazijnPlaatsList()) {
-          magazijnPlaatsRepository.updateAantalAndId(magazijnPlaats.getMagazijnPlaatsId(),magazijnPlaats.getArtikelId(),magazijnPlaats.getAantal());
-          inkomendeleveringslijnRepository.create(new Inkomendeleveringslijn(
-                  inkomendeLeveringId,
-                  magazijnPlaats.getArtikelId(),
-                  magazijnPlaats.getAantal(),
-                  0,
-                  magazijnPlaats.getMagazijnPlaatsId()
-          ));
+            magazijnPlaatsRepository.updateAantalAndId(magazijnPlaats.getMagazijnPlaatsId(), magazijnPlaats.getArtikelId(), magazijnPlaats.getAantal());
+            inkomendeleveringslijnRepository.create(new Inkomendeleveringslijn(
+                    inkomendeLeveringId,
+                    magazijnPlaats.getArtikelId(),
+                    magazijnPlaats.getAantal(),
+                    0,
+                    magazijnPlaats.getMagazijnPlaatsId()
+            ));
         }
 
         Map<Long, MagazijnPlaats> laatsteArtikelMap = new HashMap<>();

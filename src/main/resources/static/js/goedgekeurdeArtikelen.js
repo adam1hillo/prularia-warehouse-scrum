@@ -1,5 +1,5 @@
 "use strict"
-import {byId, toon, verberg, setText} from "./util.js";
+import {byId, toon} from "./util.js";
 
 
 const artikelenDataFromStorage = JSON.parse(localStorage.getItem("artikelen"));
@@ -30,7 +30,7 @@ function findNaamById(id) {
 }
 
 let artikelDataForHtml = [];
-let magazijnPlaceForAllArtikel ;
+let magazijnPlaceForAllArtikel;
 
 const response = await fetch("artikelen/findAllPlaceForDelivery", {
     method: "POST",
@@ -56,105 +56,91 @@ if (response.ok) {
     toon("storing");
 }
 
-    const tbody = document.getElementById('goedgekeurdeArtikelenBody');
-    const bevestigButton = document.getElementById('bevestig');
+const tbody = document.getElementById('goedgekeurdeArtikelenBody');
+const bevestigButton = document.getElementById('bevestig');
 
-    function tableInvullen(data) {
-        data.forEach(item => {
-            const tr = document.createElement('tr');
-            let td = document.createElement('td');
+function tableInvullen(data) {
+    data.forEach(item => {
+        const tr = document.createElement('tr');
+        let td = document.createElement('td');
 
-            td.textContent = item.rij;
-            tr.appendChild(td);
+        td.textContent = item.rij;
+        tr.appendChild(td);
 
-            td = document.createElement('td');
-            td.textContent = item.rek;
-            tr.appendChild(td);
+        td = document.createElement('td');
+        td.textContent = item.rek;
+        tr.appendChild(td);
 
-            td = document.createElement('td');
-            td.textContent = item.artikelNaam;
-            tr.appendChild(td);
+        td = document.createElement('td');
+        td.textContent = item.artikelNaam;
+        tr.appendChild(td);
 
-            td = document.createElement('td');
-            td.textContent = item.aantal;
-            tr.appendChild(td);
+        td = document.createElement('td');
+        td.textContent = item.aantal;
+        tr.appendChild(td);
 
-            td = document.createElement('td');
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            td.appendChild(checkbox);
-            tr.appendChild(td);
+        td = document.createElement('td');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        td.appendChild(checkbox);
+        tr.appendChild(td);
 
-            tbody.appendChild(tr);
+        tbody.appendChild(tr);
 
-            checkbox.onclick = function () {
-                getCheckedCheckboxes();
-                if (checkbox.checked) {
-                    tr.classList.add("checked");
-                    tr.style.background = "#ABD7A8";
-                } else {
-                    tr.classList.remove("checked");
-                    tr.style.background = "white";
-                }
-                const checkedList = document.getElementsByClassName("checked");
-                byId("bevestig").disabled = checkedList.length !== data.length;
+        checkbox.onclick = function () {
+            getCheckedCheckboxes();
+            if (checkbox.checked) {
+                tr.classList.add("checked");
+                tr.style.background = "#ABD7A8";
+            } else {
+                tr.classList.remove("checked");
+                tr.style.background = "white";
             }
-        });
+            const checkedList = document.getElementsByClassName("checked");
+            byId("bevestig").disabled = checkedList.length !== data.length;
+        }
+    });
+}
+
+//sort artikelDataForHtml
+artikelDataForHtml = artikelDataForHtml.sort((a, b) => {
+    if (a.rij === b.rij) {
+        return a.rek > b.rek ? 1 : (a.rek < b.rek ? -1 : 0);
+    } else {
+        return a.rij > b.rij ? 1 : (a.rij < b.rij ? -1 : 0);
+    }
+});
+
+tableInvullen(artikelDataForHtml);
+
+bevestigButton.disabled = true;
+
+
+bevestigButton.addEventListener('click', async () => {
+
+    const data = {
+        "leveranciersId": Number(leveringsBonDataFromStorage.leveranciersId),
+        "leveringsbonNummer": leveringsBonDataFromStorage.leveringsbonNummer,
+        "leveringsbondatum": leveringsBonDataFromStorage.leveringsbonDatum,
+        "leverDatum": leveringsBonDataFromStorage.leverdatum,
+        "artikelIdEnAfgekeurdList": artikelEnAfgekeurdData,
+        "magazijnPlaatsList": magazijnPlaceForAllArtikel
     }
 
-    tableInvullen(artikelDataForHtml);
-
-    bevestigButton.disabled = true;
-
-
-    bevestigButton.addEventListener('click', async () => {
-
-        const data = {
-            "leveranciersId": Number(leveringsBonDataFromStorage.leveranciersId),
-            "leveringsbonNummer": leveringsBonDataFromStorage.leveringsbonNummer,
-            "leveringsbondatum" : leveringsBonDataFromStorage.leveringsbonDatum ,
-            "leverDatum":leveringsBonDataFromStorage.leverdatum,
-            "artikelIdEnAfgekeurdList": artikelEnAfgekeurdData,
-            "magazijnPlaatsList":magazijnPlaceForAllArtikel
-        }
-
-        // console.log(data);
-
-        const response = await fetch("leveringen/create", {
-            method: "POST",
-            headers: {
-                            "Content-type": "application/json"
-                        },
-            body: JSON.stringify(data)
-        });
-        console.log(response);
-        if (response.ok) {
-            window.location.href = "bevestigingspaginaLevering.html";
-             //const inkomendeLeveringsId = await response.json();
-            // console.log(inkomendeLeveringsId);
-            // console.log(magazijnPlaceForAllArtikel);
-
-            /*const responseForPlaceUpdate = await fetch("artikelen/updateAllPlaceForDelivery", {
-                method: "PATCH",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify(magazijnPlaceForAllArtikel)
-            });
-
-            if (responseForPlaceUpdate.ok) {
-                const listForUpdatedMagazijnPlaces = await responseForPlaceUpdate.json();
-                console.log(listForUpdatedMagazijnPlaces);
-            } else {
-                toon("storing");
-            }*/
-
-        } else {
-            toon("storing");
-        }
-
-       // window.location.href = "bevestiging.html";
+    const response = await fetch("leveringen/create", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(data)
     });
+    // console.log(response);
+    if (response.ok) {
+        window.location.href = "bevestigingspagina-levering.html";
+    } else {
+        toon("storing");
+    }
+});
 
 function getCheckedCheckboxes() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
