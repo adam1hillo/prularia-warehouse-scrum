@@ -174,7 +174,7 @@ async function voegArtikelToe() {
 
         // Add TD for afgekeurd
         const afgekeurdTd = document.createElement('td');
-        afgekeurdTd.innerText = 0;
+        afgekeurdTd.innerText = aantalArtikelen;
         tr.appendChild(afgekeurdTd);
 
 
