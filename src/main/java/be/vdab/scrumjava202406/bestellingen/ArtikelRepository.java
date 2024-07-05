@@ -14,7 +14,7 @@ public class ArtikelRepository {
         this.jdbcClient = jdbcClient;
     }
 
-    Optional<Artikel> findById(long id) {
+    public Optional<Artikel> findById(long id) {
         String sql = """
                select artikelId, ean, naam,beschrijving,prijs,gewichtInGram,bestelpeil,voorraad,minimumVoorraad,maximumVoorraad,levertijd,aantalBesteldLeverancier,maxAantalInMagazijnPlaats,leveranciersId
                from Artikelen
@@ -45,5 +45,27 @@ void updateTotaleVoorraadPerArtikel(long artikelId, AanpassingVoorraadMetAantal 
                 """;
 
         jdbcClient.sql(sql).params(rijRekNieuweAantal.aantal(), String.valueOf(rijRekNieuweAantal.rij()), rijRekNieuweAantal.rek()).update();
+    }
+}
+
+Optional<Artikel> findByEanLastFive(String eanLastFive) {
+    var sql = """
+                select artikelId, ean, naam,beschrijving,prijs,gewichtInGram,bestelpeil,voorraad,minimumVoorraad,maximumVoorraad,levertijd,aantalBesteldLeverancier,maxAantalInMagazijnPlaats,leveranciersId
+                from Artikelen
+                where ean like ?
+                """;
+    String like = "%" + eanLastFive;
+    return jdbcClient.sql(sql)
+            .param(like)
+            .query(Artikel.class)
+            .optional();
+}
+public void verhoogVoorraad(long artikelId, int voorraad) {
+    String sql = """ 
+                UPDATE Artikelen
+                SET voorraad = voorraad + ?
+                WHERE artikelId = ?;""";
+    if (jdbcClient.sql(sql).params(voorraad, artikelId).update() == 0) {
+        throw new ArtikelNietGevondenException(artikelId);
     }
 }

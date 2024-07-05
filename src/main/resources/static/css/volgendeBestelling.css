@@ -47,6 +47,8 @@ body{
     text-transform: uppercase;
     cursor: pointer;
     transition: 0.3s;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .button-confirm:hover{

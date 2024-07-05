@@ -11,10 +11,12 @@ import java.util.List;
 public class ArtikelController {
     private final ArtikelService artikelService;
     private static MagazijnPlaatsService magazijnPlaatsService = null;
+    private final ArtikelRepository artikelRepository;
 
-    public ArtikelController(ArtikelService artikelService,MagazijnPlaatsService magazijnPlaatsService) {
+    public ArtikelController(ArtikelService artikelService, MagazijnPlaatsService magazijnPlaatsService, ArtikelRepository artikelRepository) {
         this.artikelService = artikelService;
         this.magazijnPlaatsService = magazijnPlaatsService;
+        this.artikelRepository = artikelRepository;
     }
 
     private record ArtikelMetPlaatsenDTO(long artikelId, String naam, BigDecimal prijs, long gewichtInGram, int voorraad, int maximumVoorraad, int maxAantalInMagazijnPlaats, List<MagazijnPlaats> magazijnPlaatsen) {
@@ -24,12 +26,58 @@ public class ArtikelController {
                     );
         }
     }
+
+    private record ArtikelNaamEan(String naam, long artikelId, String ean) {
+        ArtikelNaamEan(Artikel artikel) {
+            this(artikel.getNaam(), artikel.getArtikelId(), artikel.getEan());
+        }
+    }
+
+    /*@GetMapping("{id}")
+    Artikel findById(@PathVariable long id) {
+        return artikelService.findById(id)
+                .orElseThrow(() -> new ArtikelNietGevondenException(id));
+    }*/
+
     @GetMapping("{id}")
     ArtikelMetPlaatsenDTO findById(@PathVariable long id) {
         return artikelService.findById(id)
                 .map(ArtikelMetPlaatsenDTO::new)
                 .orElseThrow(() -> new ArtikelNietGevondenException(id));
     }
+
+    @GetMapping("metEanLastFive/{eanLastFive}")
+    ArtikelNaamEan findArtikelNaamByEanLastFive(@PathVariable String eanLastFive) {
+        return artikelService.findByEanLastFive(eanLastFive)
+                .map(ArtikelNaamEan::new)
+                .orElseThrow(() -> new ArtikelNietGevondenException(eanLastFive));
+    }
+
+    /*@GetMapping("checkFreeSpace/{id}")
+    MagazijnPlaats checkFreeSpaceCanAddedToPlace(@PathVariable long id){
+        return magazijnPlaatsService.checkFreeSpaceCanAddedToPlace(id)
+                .orElseThrow(MagazijnPlaatsNietGevondenException::new);
+    }
+
+    @PatchMapping("updateAantal")
+    void updateAantal(){
+        magazijnPlaatsService.updateAantal(561, 5);
+    }*/
+
+   /* @GetMapping("findAvailablePlace/{id}/{aantal}")
+    List<MagazijnPlaats> algemeelUpdate(@PathVariable long id, @PathVariable int aantal){
+        return artikelService.updateAantalAlgemeel(id, aantal);
+    }*/
+
+    @PostMapping("findAllPlaceForDelivery")
+    public List<MagazijnPlaats> findAllPlaceForDelivery(@RequestBody List<ArtikelPlaatsRequest> artikelPlaatsRequests) {
+        return artikelService.findAllPlaceForDelivery(artikelPlaatsRequests);
+    }
+
+    /*@PatchMapping("updateAllPlaceForDelivery")
+    public List<MagazijnPlaats> updateAllPlaceForDelivery(@RequestBody List<MagazijnPlaats> magazijnPlaatsen){
+        return artikelService.updateAllPlaceForDelivery(magazijnPlaatsen);
+    }*/
     @PatchMapping("updateVoorraad/{artikelId}/aantal")
     void updateTotaleVoorraad(@PathVariable long artikelId, @RequestBody @Valid AanpassingVoorraadMetAantal aantal) {
         artikelService.updateTotaleVoorraad(artikelId, aantal);
