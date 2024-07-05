@@ -39,8 +39,7 @@ const response = await fetch("artikelen/findAllPlaceForDelivery", {
 });
 if (response.ok) {
     const responsebody = await response.json();
-    //TODO remove log
-    // console.log(responsebody)
+
     magazijnPlaceForAllArtikel = responsebody;
     responsebody.map(item => {
         artikelDataForHtml.push({
