@@ -6,6 +6,8 @@ const artikelenDataFromStorage = JSON.parse(localStorage.getItem("artikelen"));
 const leveringsBonDataFromStorage = JSON.parse(localStorage.getItem("leveringsbonData"));
 
 
+byId("leveringsbonNummer").innerText = leveringsBonDataFromStorage.leveringsbonNummer;
+
 // console.log(artikelenDataFromStorage);
 // console.log(leveringsBonDataFromStorage);
 let artikelDataForFetch = [];
