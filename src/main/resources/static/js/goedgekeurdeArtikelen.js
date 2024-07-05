@@ -5,9 +5,9 @@ import {byId, toon, verberg, setText} from "./util.js";
 const artikelenDataFromStorage = JSON.parse(localStorage.getItem("artikelen"));
 const leveringsBonDataFromStorage = JSON.parse(localStorage.getItem("leveringsbonData"));
 
-console.log(artikelenDataFromStorage);
-console.log(leveringsBonDataFromStorage);
 
+// console.log(artikelenDataFromStorage);
+// console.log(leveringsBonDataFromStorage);
 let artikelDataForFetch = [];
 let artikelEnAfgekeurdData = [];
 artikelenDataFromStorage.map(artikel => {
@@ -22,7 +22,7 @@ artikelenDataFromStorage.map(artikel => {
     })
 })
 
-console.log(artikelDataForFetch);
+//console.log(artikelDataForFetch);
 
 function findNaamById(id) {
     const product = artikelenDataFromStorage.find(product => product.id === id);
@@ -39,7 +39,8 @@ const response = await fetch("artikelen/findAllPlaceForDelivery", {
 });
 if (response.ok) {
     const responsebody = await response.json();
-    console.log(responsebody)
+    //TODO remove log
+    // console.log(responsebody)
     magazijnPlaceForAllArtikel = responsebody;
     responsebody.map(item => {
         artikelDataForHtml.push({
