@@ -48,7 +48,8 @@ class InkomendeLeveringService {
     }
 
     @Transactional
-    public long nieuweInkomendeLevering(NieuweInkomendeLevering nieuweInkomendeLevering ) {
+    public long nieuweInkomendeLevering(NieuweInkomendeLevering nieuweInkomendeLevering) {
+        // 12/06/2024
         ZonedDateTime zonedDateTime = ZonedDateTime.parse(nieuweInkomendeLevering.leveringsbondatum());
         ZonedDateTime zonedDateTime1 = ZonedDateTime.parse(nieuweInkomendeLevering.leverDatum());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -68,12 +69,13 @@ class InkomendeLeveringService {
         System.out.println(nieuweInkomendeLevering.artikelIdEnAfgekeurdList());
 
 
+        // verhoogvoorraad
         for (ArtikelIdEnAfgekeurd artikelIdEnAfgekeurd : nieuweInkomendeLevering.artikelIdEnAfgekeurdList()) {
-            artikelRepository.updateVoorraad(artikelIdEnAfgekeurd.getArtikelId(), artikelIdEnAfgekeurd.getGoedgekeurd());
+            artikelRepository.verhoogVoorraad(artikelIdEnAfgekeurd.getArtikelId(), artikelIdEnAfgekeurd.getGoedgekeurd());
         }
 
 
-        // updatePlaces
+        // updatePlaces and create inkomendeleveringslijnen
         for (MagazijnPlaats magazijnPlaats : nieuweInkomendeLevering.magazijnPlaatsList()) {
           magazijnPlaatsRepository.updateAantalAndId(magazijnPlaats.getMagazijnPlaatsId(),magazijnPlaats.getArtikelId(),magazijnPlaats.getAantal());
           inkomendeleveringslijnRepository.create(new Inkomendeleveringslijn(
@@ -91,6 +93,7 @@ class InkomendeLeveringService {
             laatsteArtikelMap.put(plaats.getArtikelId(), plaats);
         }
 
+        // update last of the artikel aantalterug for inkomendeleveringlijnen
         for (MagazijnPlaats laatstePlaats : laatsteArtikelMap.values()) {
             System.out.println(laatstePlaats);
             inkomendeleveringslijnRepository.update(new Inkomendeleveringslijn(

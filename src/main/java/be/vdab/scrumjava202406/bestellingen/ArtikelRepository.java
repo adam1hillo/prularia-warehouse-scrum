@@ -37,7 +37,8 @@ public class ArtikelRepository {
                 .query(Artikel.class)
                 .optional();
     }
-    public void updateVoorraad(long artikelId, int voorraad) {
+
+    public void verhoogVoorraad(long artikelId, int voorraad) {
         String sql = """ 
                 UPDATE Artikelen
                 SET voorraad = voorraad + ?

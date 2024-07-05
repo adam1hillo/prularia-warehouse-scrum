@@ -52,7 +52,7 @@ public class ArtikelController {
                 .orElseThrow(() -> new ArtikelNietGevondenException(eanLastFive));
     }
 
-    @GetMapping("checkFreeSpace/{id}")
+    /*@GetMapping("checkFreeSpace/{id}")
     MagazijnPlaats checkFreeSpaceCanAddedToPlace(@PathVariable long id){
         return magazijnPlaatsService.checkFreeSpaceCanAddedToPlace(id)
                 .orElseThrow(MagazijnPlaatsNietGevondenException::new);
@@ -61,7 +61,7 @@ public class ArtikelController {
     @PatchMapping("updateAantal")
     void updateAantal(){
         magazijnPlaatsService.updateAantal(561, 5);
-    }
+    }*/
 
    /* @GetMapping("findAvailablePlace/{id}/{aantal}")
     List<MagazijnPlaats> algemeelUpdate(@PathVariable long id, @PathVariable int aantal){
@@ -73,8 +73,8 @@ public class ArtikelController {
        return artikelService.findAllPlaceForDelivery(artikelPlaatsRequests);
     }
 
-    @PatchMapping("updateAllPlaceForDelivery")
+    /*@PatchMapping("updateAllPlaceForDelivery")
     public List<MagazijnPlaats> updateAllPlaceForDelivery(@RequestBody List<MagazijnPlaats> magazijnPlaatsen){
         return artikelService.updateAllPlaceForDelivery(magazijnPlaatsen);
-    }
+    }*/
 }
