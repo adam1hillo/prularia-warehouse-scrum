@@ -69,7 +69,7 @@ public class MagazijnPlaatsRepository {
         String sql = """ 
                 SELECT magazijnPlaatsId, artikelId, rij, rek, aantal
                 FROM magazijnplaatsen
-                WHERE artikelId = ? AND aantal != ?;""";
+                WHERE artikelId = ? AND aantal != ? AND aantal != 0 AND artikelId IS NOT NULL;""";
         return jdbcClient.sql(sql)
                 .params(id,maxAantalInMagazijnPLaats)
                 .query(MagazijnPlaats.class)
