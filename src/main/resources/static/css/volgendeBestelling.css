@@ -5,16 +5,18 @@ body{
     font-family: Arial, serif;
 }
 
-.banner{
+.banner {
+    background-color: #a6cfa6; /* Light green background */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10rem;
-    background-color: #ABD7A8;
+    padding: 20px;
 }
 
-.logo{
-    width: 20rem;
+.banner img {
+    width: 33%;
+    height: auto;
+    max-width: 100%;
 }
 
 .container{
