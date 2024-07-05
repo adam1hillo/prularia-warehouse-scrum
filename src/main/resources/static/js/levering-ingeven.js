@@ -11,6 +11,32 @@ const leveringsbonnummerInput = byId("leveringsbonnummer-input");
 const leveringsbondatumInput = byId("leveringsbondatum-input");
 const leverdatumInput = byId("leverdatum-input");
 
+const inputs = [leverancierSelect, leveringsbonnummerInput, leveringsbondatumInput, leverdatumInput];
+
+const checkInputs = () => {
+    let allFilled = true;
+
+    inputs.forEach(input => {
+        if (input.type === 'select-one') {
+            if (input.value === '') {
+                allFilled = false;
+            }
+        } else {
+            if (input.value.trim() === '') {
+                allFilled = false;
+            }
+        }
+    });
+
+    btnNext.disabled = !allFilled;
+};
+
+inputs.forEach(input => {
+    input.addEventListener('input', checkInputs);
+});
+
+checkInputs();
+
 const leveringsbonData = {
     // leveranciersId,
     // leveringsbonNummer,

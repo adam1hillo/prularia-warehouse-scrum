@@ -184,3 +184,10 @@ tbody tr {
     justify-content: flex-start;
     gap: 2rem;
 }
+
+
+.button-container button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
