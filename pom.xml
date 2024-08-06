@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>be.vdab</groupId>
-    <artifactId>ScrumJava202406</artifactId>
+    <artifactId>SCRUMproject</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ScrumJava202406</name>
     <description>ScrumJava202406</description>
